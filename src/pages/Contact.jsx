@@ -56,9 +56,9 @@ export default function Contact() {
 
           <div className="flex flex-col gap-5 mb-8">
             {[
-              { Icon: Phone, label: 'Phone', val: '+20 123 456 7890', sub: 'Sun – Thu, 9am – 6pm', href: 'tel:+201234567890' },
+              { Icon: Phone, label: 'Phone', val: '+20 115 918 8819', sub: 'Sun – Thu, 9am – 6pm', href: 'tel:+201159188819' },
               { Icon: Mail,  label: 'Email', val: 'Dentalarenastore@gmail.com', sub: 'Reply within 24 hours', href: 'mailto:Dentalarenastore@gmail.com' },
-              { Icon: MessageCircle, label: 'WhatsApp', val: '+20 123 456 7890', sub: 'Available 24/7 for urgent', href: '#' },
+              { Icon: MessageCircle, label: 'WhatsApp', val: '+20 114 112 9291', sub: 'Available 24/7 for urgent queries', href: 'https://wa.me/201141129291' },
               { Icon: MapPin, label: 'Address', val: 'Cairo, Egypt', sub: null, href: null },
             ].map(({ Icon, label, val, sub, href }) => (
               <div key={label} className="flex items-start gap-4">
@@ -67,7 +67,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <div className="font-semibold text-sm text-gray-900">{label}</div>
-                  {href ? <a href={href} className="text-sm text-arena-blue hover:underline">{val}</a> : <div className="text-sm text-gray-600">{val}</div>}
+                  {href ? <a href={href} target={href.startsWith('https') ? '_blank' : undefined} rel="noopener noreferrer" className="text-sm text-arena-blue hover:underline">{val}</a> : <div className="text-sm text-gray-600">{val}</div>}
                   {sub && <div className="text-xs text-gray-400 mt-0.5">{sub}</div>}
                 </div>
               </div>

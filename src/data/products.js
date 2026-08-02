@@ -26,6 +26,9 @@ export const specialties = [
   { id: 'infection-control', label: 'Infection Control',   icon: '🛡️',  desc: 'Gloves, masks, disinfectants, and sterilization.' },
   { id: 'digital',           label: 'Digital Dentistry',   icon: '💻', desc: 'Intraoral scanners, CAD/CAM systems, and CBCT.' },
   { id: 'microscopes',       label: 'Microscopes',         icon: '🔭', desc: 'Surgical microscopes and loupes.' },
+  { id: 'consumables',       label: 'Consumables',         icon: '📦', desc: 'Everyday disposables and clinical supplies.' },
+  { id: 'instruments',       label: 'Instruments',         icon: '🔧', desc: 'Hand instruments, probes, and diagnostic tools.' },
+  { id: 'bleaching',         label: 'Bleaching',           icon: '✨', desc: 'Teeth whitening gels, trays, and lamp systems.' },
   { id: 'all',               label: 'All Specialties',     icon: '⬛', desc: 'Browse our complete catalog.' },
 ]
 
@@ -41,6 +44,9 @@ export const categories = {
   'infection-control': ['Gloves', 'Masks', 'Sterilization', 'Disinfectants', 'Barriers'],
   digital:          ['Intraoral Scanners', 'CAD/CAM', 'CBCT', 'Software'],
   microscopes:      ['Dental Microscopes', 'Loupes', 'Accessories'],
+  consumables:      ['Gloves', 'Masks', 'Needles', 'Cups', 'Bibs', 'Suction Tips', 'Syringes'],
+  instruments:      ['Probes', 'Mirrors', 'Scalers', 'Forceps', 'Elevators', 'Scissors', 'Retractors'],
+  bleaching:        ['Whitening Gels', 'Whitening Trays', 'Bleaching Lamps', 'Take-Home Kits', 'In-Office Kits'],
 }
 
 export const products = [

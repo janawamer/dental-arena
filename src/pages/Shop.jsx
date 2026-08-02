@@ -11,7 +11,9 @@ const SPECIALTY_ICONS = {
   endodontics: '🦷', orthodontics: '😁', restorative: '🔬',
   implantology: '🏥', 'oral-surgery': '⚕️', periodontics: '🩺',
   prosthodontics: '👑', pediatric: '👶', 'infection-control': '🛡️',
-  digital: '💻', microscopes: '🔭', all: '⬛',
+  digital: '💻', microscopes: '🔭',
+  consumables: '📦', instruments: '🔧', bleaching: '✨',
+  all: '⬛',
 }
 
 export default function Shop() {

@@ -55,8 +55,6 @@ export default function HotDeals() {
       return 0
     })
 
-  const ICONS = ['🦷','🔬','🧤','😁','💊','🩺','😷','💉','⚗️','🔧','🌸','🧴']
-  const COLORS = ['bg-blue-50','bg-purple-50','bg-green-50','bg-orange-50','bg-teal-50','bg-red-50']
 
   return (
     <div>
@@ -106,15 +104,13 @@ export default function HotDeals() {
       {/* Deals Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filtered.map((deal, i) => {
+          {filtered.map((deal) => {
             const discount = Math.round((1 - deal.price / deal.oldPrice) * 100)
-            const icon = ICONS[i % ICONS.length]
-            const bgColor = COLORS[i % COLORS.length]
             return (
               <div key={deal.id} className="card flex flex-col overflow-hidden group">
                 {/* Card image */}
-                <div className={`relative h-36 ${bgColor} flex items-center justify-center text-5xl`}>
-                  {icon}
+                <div className="relative h-36 bg-gray-100 overflow-hidden">
+                  <img src={deal.image_url} alt={deal.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   <span className="absolute top-3 right-3 bg-orange-500 text-white text-xs font-black px-2.5 py-0.5 rounded-full">
                     -{discount}%
                   </span>

@@ -2,21 +2,9 @@ import { ShoppingCart, Star } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { useState } from 'react'
 
-const PRODUCT_ICONS = ['🦷','🔬','💊','🩺','⚕️','🏥','🔧','🧪','💉','🔭','🖥️','🧲']
-const PRODUCT_COLORS = [
-  'from-blue-50 to-blue-100 text-blue-600',
-  'from-purple-50 to-purple-100 text-purple-600',
-  'from-green-50 to-green-100 text-green-600',
-  'from-orange-50 to-orange-100 text-orange-600',
-  'from-teal-50 to-teal-100 text-teal-600',
-  'from-rose-50 to-rose-100 text-rose-600',
-]
-
 export default function ProductCard({ product, index = 0 }) {
   const { addToCart } = useCart()
   const [added, setAdded] = useState(false)
-  const icon = product.image_url ? null : PRODUCT_ICONS[index % PRODUCT_ICONS.length]
-  const colorClass = PRODUCT_COLORS[index % PRODUCT_COLORS.length]
   const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null
 
   function handleAdd() {
@@ -27,11 +15,13 @@ export default function ProductCard({ product, index = 0 }) {
 
   return (
     <div className="card group flex flex-col overflow-hidden">
-      {/* Image / placeholder */}
-      <div className={`relative h-36 sm:h-44 flex items-center justify-center overflow-hidden ${product.image_url ? 'bg-gray-50' : `bg-gradient-to-br ${colorClass}`}`}>
+      {/* Product image */}
+      <div className="relative h-36 sm:h-44 bg-gray-100 overflow-hidden">
         {product.image_url
           ? <img src={product.image_url} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-          : <span className="text-4xl sm:text-5xl">{icon}</span>
+          : <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+              <span className="text-slate-400 text-xs font-medium uppercase tracking-widest">No Image</span>
+            </div>
         }
         {discount && (
           <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-1.5 sm:px-2 py-0.5 rounded-full">
@@ -41,7 +31,7 @@ export default function ProductCard({ product, index = 0 }) {
       </div>
 
       <div className="p-3 sm:p-4 flex flex-col gap-1.5 sm:gap-2 flex-1">
-        <div className="text-xs font-medium text-arena-teal uppercase tracking-wide truncate">{product.brand}</div>
+        <div className="text-xs font-semibold text-arena-teal uppercase tracking-wide truncate">{product.brand}</div>
         <h3 className="font-semibold text-gray-900 text-xs sm:text-sm leading-snug line-clamp-2">{product.name}</h3>
 
         {/* Rating */}

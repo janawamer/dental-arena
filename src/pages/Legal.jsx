@@ -39,16 +39,6 @@ export function Privacy() {
 
 export function Refund() {
   return <LegalPage title="Refund & Return Policy">
-    <div className="grid grid-cols-3 gap-4 mb-8">
-      {[['📅','3-Day Returns','Request a return within 3 days of delivery'],['↩️','Easy Process','Contact us and we arrange a hassle-free return'],['💸','Fast Refunds','Processed within 3 business days']].map(([e,t,d]) => (
-        <div key={t} className="rounded-xl p-4 text-center text-sm border border-gray-100 bg-gray-50">
-          <div className="text-2xl mb-2">{e}</div>
-          <div className="font-bold text-gray-900 mb-1">{t}</div>
-          <div className="text-gray-500 text-xs">{d}</div>
-        </div>
-      ))}
-    </div>
-
     <Section title="1. Eligibility for Returns">
       <p className="mb-3">Customers may request a return or refund within <strong>3 days</strong> of receiving their order.</p>
       <p className="mb-2">To be eligible for a return, the product must:</p>

@@ -1,40 +1,59 @@
-import { createContext, useContext, useReducer, useEffect } from 'react'
+import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { useAuth } from './AuthContext'
 
 const CartContext = createContext()
 
-function cartReducer(state, action) {
-  switch (action.type) {
-    case 'ADD': {
-      const existing = state.find(i => i.id === action.item.id)
-      if (existing) return state.map(i => i.id === action.item.id ? { ...i, qty: i.qty + 1 } : i)
-      return [...state, { ...action.item, qty: 1 }]
-    }
-    case 'REMOVE':
-      return state.filter(i => i.id !== action.id)
-    case 'SET_QTY':
-      return state.map(i => i.id === action.id ? { ...i, qty: Math.max(1, action.qty) } : i)
-    case 'CLEAR':
-      return []
-    default:
-      return state
-  }
+function storageKey(userId) {
+  return userId ? `da_cart_${userId}` : 'da_cart_guest'
 }
 
 export function CartProvider({ children }) {
-  const saved = JSON.parse(localStorage.getItem('da_cart') || '[]')
-  const [cart, dispatch] = useReducer(cartReducer, saved)
+  const { user, loading } = useAuth()
+  const [cart, setCart] = useState([])
 
+  // Load cart when auth resolves or user changes
   useEffect(() => {
-    localStorage.setItem('da_cart', JSON.stringify(cart))
-  }, [cart])
+    if (loading) return
+    const key = storageKey(user?.id)
+    const saved = JSON.parse(localStorage.getItem(key) || '[]')
 
-  const addToCart = item => dispatch({ type: 'ADD', item })
-  const removeFromCart = id => dispatch({ type: 'REMOVE', id })
-  const setQty = (id, qty) => dispatch({ type: 'SET_QTY', id, qty })
-  const clearCart = () => dispatch({ type: 'CLEAR' })
+    if (user) {
+      // Merge any guest cart items into the user cart on login
+      const guestCart = JSON.parse(localStorage.getItem('da_cart_guest') || '[]')
+      if (guestCart.length > 0) {
+        localStorage.removeItem('da_cart_guest')
+        const merged = [...saved]
+        for (const g of guestCart) {
+          const ex = merged.find(i => i.id === g.id)
+          if (ex) ex.qty += g.qty
+          else merged.push(g)
+        }
+        setCart(merged)
+        return
+      }
+    }
+
+    setCart(saved)
+  }, [user?.id, loading])
+
+  // Persist whenever cart changes
+  useEffect(() => {
+    if (loading) return
+    localStorage.setItem(storageKey(user?.id), JSON.stringify(cart))
+  }, [cart, user?.id, loading])
+
+  const addToCart = useCallback((item) => setCart(prev => {
+    const ex = prev.find(i => i.id === item.id)
+    if (ex) return prev.map(i => i.id === item.id ? { ...i, qty: i.qty + 1 } : i)
+    return [...prev, { ...item, qty: 1 }]
+  }), [])
+
+  const removeFromCart = useCallback((id) => setCart(prev => prev.filter(i => i.id !== id)), [])
+  const setQty = useCallback((id, qty) => setCart(prev => prev.map(i => i.id === id ? { ...i, qty: Math.max(1, qty) } : i)), [])
+  const clearCart = useCallback(() => setCart([]), [])
 
   const totalItems = cart.reduce((s, i) => s + i.qty, 0)
-  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0)
+  const subtotal   = cart.reduce((s, i) => s + i.price * i.qty, 0)
 
   return (
     <CartContext.Provider value={{ cart, addToCart, removeFromCart, setQty, clearCart, totalItems, subtotal }}>

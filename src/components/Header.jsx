@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { ShoppingCart, User, Headphones, Search, Menu, X, LayoutDashboard, Package, LogOut, ChevronDown } from 'lucide-react'
+import { ShoppingCart, Heart, Headphones, Search, Menu, X, LayoutDashboard, Package, LogOut, ChevronDown } from 'lucide-react'
 import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
 import { useAuth } from '../context/AuthContext'
 
 export default function Header() {
   const { totalItems } = useCart()
+  const { totalWishlist } = useWishlist()
   const { isLoggedIn, isAdmin, profile, signOut } = useAuth()
   const [query, setQuery] = useState('')
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -57,6 +59,17 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-5 ml-auto">
+            {/* Wishlist */}
+            <Link to="/wishlist" className="relative flex flex-col items-center gap-0.5 text-gray-600 hover:text-red-500 transition-colors group">
+              <Heart size={20} className="group-hover:scale-110 transition-transform" />
+              <span className="text-xs font-medium">Wishlist</span>
+              {totalWishlist > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold shadow">
+                  {totalWishlist}
+                </span>
+              )}
+            </Link>
+
             {/* Cart */}
             <Link to="/cart" className="relative flex flex-col items-center gap-0.5 text-gray-600 hover:text-arena-blue transition-colors group">
               <ShoppingCart size={20} className="group-hover:scale-110 transition-transform" />
@@ -129,7 +142,7 @@ export default function Header() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-100 bg-white px-4 pb-4 flex flex-col gap-1">
-          {[['/', 'Home'], ['/shop', 'Shop'], ['/hot-deals', 'Hot Deals'], ['/marketplace', 'Marketplace'], ['/cart', `Cart (${totalItems})`], ['/contact', 'Contact']].map(([to, label]) => (
+          {[['/', 'Home'], ['/shop', 'Shop'], ['/hot-deals', 'Hot Deals'], ['/marketplace', 'Marketplace'], ['/wishlist', `Wishlist${totalWishlist > 0 ? ` (${totalWishlist})` : ''}`], ['/cart', `Cart (${totalItems})`], ['/contact', 'Contact']].map(([to, label]) => (
             <Link key={to} to={to} onClick={() => setMobileOpen(false)}
               className="py-2.5 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-arena-blue"
             >{label}</Link>

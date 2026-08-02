@@ -24,12 +24,15 @@ import AdminProducts from './pages/admin/AdminProducts'
 import AdminOrders from './pages/admin/AdminOrders'
 import AdminListings from './pages/admin/AdminListings'
 import AdminSettings from './pages/admin/AdminSettings'
+import Wishlist from './pages/Wishlist'
+import { WishlistProvider } from './context/WishlistContext'
 
 export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
+          <WishlistProvider>
           <ToastProvider>
             <Routes>
               {/* Admin routes — no main Header/Footer */}
@@ -59,6 +62,7 @@ export default function App() {
                       <Route path="/contact"     element={<Contact />} />
                       <Route path="/sponsors"    element={<Sponsors />} />
                       <Route path="/about"       element={<About />} />
+                      <Route path="/wishlist"    element={<Wishlist />} />
                       <Route path="/terms"       element={<Terms />} />
                       <Route path="/privacy"     element={<Privacy />} />
                       <Route path="/refund"      element={<Refund />} />
@@ -69,6 +73,7 @@ export default function App() {
               } />
             </Routes>
           </ToastProvider>
+          </WishlistProvider>
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>

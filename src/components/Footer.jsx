@@ -46,8 +46,8 @@ export default function Footer() {
             <a href="tel:+201234567890" className="flex items-center gap-2 hover:text-white transition-colors">
               <Phone size={13} className="text-arena-teal shrink-0" /> +20 123 456 7890
             </a>
-            <a href="mailto:info@dentalarena.com" className="flex items-center gap-2 hover:text-white transition-colors break-all">
-              <Mail size={13} className="text-arena-teal shrink-0" /> info@dentalarena.com
+            <a href="mailto:Dentalarenastore@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors break-all">
+              <Mail size={13} className="text-arena-teal shrink-0" /> Dentalarenastore@gmail.com
             </a>
             <span className="flex items-center gap-2">
               <MapPin size={13} className="text-arena-teal shrink-0" /> Cairo, Egypt

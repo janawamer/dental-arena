@@ -57,7 +57,7 @@ export default function Contact() {
           <div className="flex flex-col gap-5 mb-8">
             {[
               { Icon: Phone, label: 'Phone', val: '+20 123 456 7890', sub: 'Sun – Thu, 9am – 6pm', href: 'tel:+201234567890' },
-              { Icon: Mail,  label: 'Email', val: 'info@dentalarena.com', sub: 'Reply within 24 hours', href: 'mailto:info@dentalarena.com' },
+              { Icon: Mail,  label: 'Email', val: 'Dentalarenastore@gmail.com', sub: 'Reply within 24 hours', href: 'mailto:Dentalarenastore@gmail.com' },
               { Icon: MessageCircle, label: 'WhatsApp', val: '+20 123 456 7890', sub: 'Available 24/7 for urgent', href: '#' },
               { Icon: MapPin, label: 'Address', val: 'Cairo, Egypt', sub: null, href: null },
             ].map(({ Icon, label, val, sub, href }) => (

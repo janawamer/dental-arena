@@ -20,7 +20,7 @@ export function Terms() {
     <Section title="7. Intellectual Property">All content on this website is the property of Dental Arena and protected by Egyptian and international copyright laws.</Section>
     <Section title="8. Limitation of Liability">Dental Arena shall not be liable for any indirect or consequential damages. Our total liability shall not exceed the amount paid for the product in question.</Section>
     <Section title="9. Changes to Terms">We reserve the right to modify these terms at any time. Your continued use constitutes acceptance of new terms.</Section>
-    <Section title="10. Contact">For questions about these Terms, contact us at <a href="mailto:info@dentalarena.com" className="text-arena-blue hover:underline">info@dentalarena.com</a>.</Section>
+    <Section title="10. Contact">For questions about these Terms, contact us at <a href="mailto:Dentalarenastore@gmail.com" className="text-arena-blue hover:underline">Dentalarenastore@gmail.com</a>.</Section>
   </LegalPage>
 }
 
@@ -31,7 +31,7 @@ export function Privacy() {
     <Section title="3. Information Sharing">We do not sell or rent your personal information to third parties. We may share data with trusted service providers under strict confidentiality agreements.</Section>
     <Section title="4. Cookies">We use cookies to enhance your experience and analyze traffic. You can control cookie settings through your browser.</Section>
     <Section title="5. Data Security">We implement industry-standard security measures including SSL encryption and secure payment gateways to protect your information.</Section>
-    <Section title="6. Your Rights">You can access, correct, or delete your personal data by contacting us at <a href="mailto:info@dentalarena.com" className="text-arena-blue hover:underline">info@dentalarena.com</a>.</Section>
+    <Section title="6. Your Rights">You can access, correct, or delete your personal data by contacting us at <a href="mailto:Dentalarenastore@gmail.com" className="text-arena-blue hover:underline">Dentalarenastore@gmail.com</a>.</Section>
     <Section title="7. Data Retention">We retain your information for as long as your account is active. Order records are kept for 7 years as required by Egyptian law.</Section>
     <Section title="8. Changes">We may update this policy and will notify you of significant changes by email or by posting a notice on our website.</Section>
   </LegalPage>
@@ -51,7 +51,7 @@ export function Refund() {
     <Section title="1. Return Eligibility">Items must be returned within 14 days of delivery, in original unopened packaging, and not be sterile/single-use or near-expiry clearance products.</Section>
     <Section title="2. Non-Returnable Items">Sterile single-use items once opened, clearance Hot Deals items, digital products, items damaged by misuse, and marketplace used equipment purchases.</Section>
     <Section title="3. Defective or Wrong Items">Contact us within 48 hours of delivery with photos. We'll arrange a free replacement or full refund.</Section>
-    <Section title="4. How to Initiate a Return">Email <a href="mailto:info@dentalarena.com" className="text-arena-blue hover:underline">info@dentalarena.com</a> or WhatsApp +20 123 456 7890 with your order number and reason for return.</Section>
+    <Section title="4. How to Initiate a Return">Email <a href="mailto:Dentalarenastore@gmail.com" className="text-arena-blue hover:underline">Dentalarenastore@gmail.com</a> or WhatsApp +20 123 456 7890 with your order number and reason for return.</Section>
     <Section title="5. Refund Process">Approved refunds are processed within 5–7 business days to your original payment method. COD orders receive bank transfers.</Section>
     <Section title="6. Shipping Costs">Return shipping is the customer's responsibility unless the return is due to our error. Original shipping fees are non-refundable.</Section>
   </LegalPage>

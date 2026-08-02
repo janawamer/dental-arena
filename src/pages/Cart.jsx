@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Truck } from 'lucide-react'
+import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Truck, ShoppingCart, Package, CreditCard, Banknote, Building2 } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { supabase } from '../lib/supabase'
 
-const ICONS = ['🔬','💊','🩺','⚕️','🏥','🔧','🧪','🧬']
-const COLORS = ['bg-blue-50','bg-purple-50','bg-green-50','bg-orange-50','bg-teal-50']
+const COLORS = ['bg-blue-50 text-blue-400','bg-purple-50 text-purple-400','bg-green-50 text-green-400','bg-orange-50 text-orange-400','bg-teal-50 text-teal-400']
 
 const COUPONS = { 'ARENA10': 0.10, 'DENTAL20': 0.20, 'WELCOME15': 0.15 }
 
@@ -30,7 +29,7 @@ export default function Cart() {
     const rate = COUPONS[coupon.trim().toUpperCase()]
     if (rate) {
       setDiscount(rate)
-      setCouponMsg({ ok: true, text: `✓ ${(rate * 100)}% discount applied!` })
+      setCouponMsg({ ok: true, text: `${(rate * 100)}% discount applied!` })
     } else {
       setDiscount(0)
       setCouponMsg({ ok: false, text: 'Invalid promo code.' })
@@ -42,7 +41,9 @@ export default function Cart() {
 
   if (cart.length === 0) return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center py-20 px-4">
-      <div className="text-7xl mb-6">🛒</div>
+      <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center mb-6">
+        <ShoppingCart size={40} className="text-gray-300" />
+      </div>
       <h2 className="text-2xl font-black text-gray-800 mb-2">Your cart is empty</h2>
       <p className="text-gray-400 mb-8">Looks like you haven't added anything yet.</p>
       <Link to="/shop" className="btn-primary text-base px-8 py-3.5">Browse Products <ArrowRight size={18} /></Link>
@@ -66,7 +67,7 @@ export default function Cart() {
               <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 shrink-0">
                 {item.image_url
                   ? <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
-                  : <div className={`w-full h-full ${COLORS[i % COLORS.length]} flex items-center justify-center text-2xl`}>{ICONS[i % ICONS.length]}</div>
+                  : <div className={`w-full h-full ${COLORS[i % COLORS.length]} flex items-center justify-center`}><Package size={24} /></div>
                 }
               </div>
               <div className="flex-1 min-w-0">
@@ -132,8 +133,8 @@ export default function Cart() {
             Proceed to Checkout <ArrowRight size={18} />
           </button>
 
-          <div className="flex justify-center gap-4 mt-4 opacity-40 text-3xl">
-            💳 💰 🏦
+          <div className="flex justify-center gap-4 mt-4 opacity-30">
+            <CreditCard size={22} /> <Banknote size={22} /> <Building2 size={22} />
           </div>
         </div>
       </div>

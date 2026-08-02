@@ -15,21 +15,21 @@ const IMG = {
 }
 
 export const specialties = [
-  { id: 'endodontics',       label: 'Endodontics',         icon: '🦷', desc: 'High-quality instruments and materials for root canal therapy.' },
-  { id: 'orthodontics',      label: 'Orthodontics',        icon: '😁', desc: 'Brackets, wires, and aligners for orthodontic treatment.' },
-  { id: 'restorative',       label: 'Restorative',         icon: '🔬', desc: 'Composites, cements, and adhesives for restorations.' },
-  { id: 'implantology',      label: 'Implantology',        icon: '🏥', desc: 'Implants, abutments, and bone graft materials.' },
-  { id: 'oral-surgery',      label: 'Oral Surgery',        icon: '⚕️',  desc: 'Forceps, elevators, sutures, and anesthesia supplies.' },
-  { id: 'periodontics',      label: 'Periodontics',        icon: '🩺', desc: 'Scalers, curettes, and ultrasonic systems.' },
-  { id: 'prosthodontics',    label: 'Prosthodontics',      icon: '👑', desc: 'Impression materials, crowns, and denture supplies.' },
-  { id: 'pediatric',         label: 'Pediatric Dentistry', icon: '👶', desc: 'Pediatric crowns, fluoride varnish, and kid-friendly tools.' },
-  { id: 'infection-control', label: 'Infection Control',   icon: '🛡️',  desc: 'Gloves, masks, disinfectants, and sterilization.' },
-  { id: 'digital',           label: 'Digital Dentistry',   icon: '💻', desc: 'Intraoral scanners, CAD/CAM systems, and CBCT.' },
-  { id: 'microscopes',       label: 'Microscopes',         icon: '🔭', desc: 'Surgical microscopes and loupes.' },
-  { id: 'consumables',       label: 'Consumables',         icon: '📦', desc: 'Everyday disposables and clinical supplies.' },
-  { id: 'instruments',       label: 'Instruments',         icon: '🔧', desc: 'Hand instruments, probes, and diagnostic tools.' },
-  { id: 'bleaching',         label: 'Bleaching',           icon: '✨', desc: 'Teeth whitening gels, trays, and lamp systems.' },
-  { id: 'all',               label: 'All Specialties',     icon: '⬛', desc: 'Browse our complete catalog.' },
+  { id: 'endodontics',       label: 'Endodontics',         icon: 'endodontics',       desc: 'High-quality instruments and materials for root canal therapy.' },
+  { id: 'orthodontics',      label: 'Orthodontics',        icon: 'orthodontics',      desc: 'Brackets, wires, and aligners for orthodontic treatment.' },
+  { id: 'restorative',       label: 'Restorative',         icon: 'restorative',       desc: 'Composites, cements, and adhesives for restorations.' },
+  { id: 'implantology',      label: 'Implantology',        icon: 'implantology',      desc: 'Implants, abutments, and bone graft materials.' },
+  { id: 'oral-surgery',      label: 'Oral Surgery',        icon: 'oral-surgery',      desc: 'Forceps, elevators, sutures, and anesthesia supplies.' },
+  { id: 'periodontics',      label: 'Periodontics',        icon: 'periodontics',      desc: 'Scalers, curettes, and ultrasonic systems.' },
+  { id: 'prosthodontics',    label: 'Prosthodontics',      icon: 'prosthodontics',    desc: 'Impression materials, crowns, and denture supplies.' },
+  { id: 'pediatric',         label: 'Pediatric Dentistry', icon: 'pediatric',         desc: 'Pediatric crowns, fluoride varnish, and kid-friendly tools.' },
+  { id: 'infection-control', label: 'Infection Control',   icon: 'infection-control', desc: 'Gloves, masks, disinfectants, and sterilization.' },
+  { id: 'digital',           label: 'Digital Dentistry',   icon: 'digital',           desc: 'Intraoral scanners, CAD/CAM systems, and CBCT.' },
+  { id: 'microscopes',       label: 'Microscopes',         icon: 'microscopes',       desc: 'Surgical microscopes and loupes.' },
+  { id: 'consumables',       label: 'Consumables',         icon: 'consumables',       desc: 'Everyday disposables and clinical supplies.' },
+  { id: 'instruments',       label: 'Instruments',         icon: 'instruments',       desc: 'Hand instruments, probes, and diagnostic tools.' },
+  { id: 'bleaching',         label: 'Bleaching',           icon: 'bleaching',         desc: 'Teeth whitening gels, trays, and lamp systems.' },
+  { id: 'all',               label: 'All Specialties',     icon: 'all',               desc: 'Browse our complete catalog.' },
 ]
 
 export const categories = {

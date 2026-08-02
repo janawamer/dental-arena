@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Copy, Check, ArrowRight, Link } from 'lucide-react'
+import { Copy, Check, ArrowRight, Link, Gift, Tag as TagIcon, Clock, Building2 } from 'lucide-react'
 import { sponsors } from '../data/products'
 import TrustBadges from '../components/TrustBadges'
 
@@ -12,8 +12,8 @@ const COLOR_MAP = {
   teal:   'from-teal-50 to-teal-100 text-teal-600 border-teal-200',
 }
 
-const BRAND_EMOJIS = ['🦷','🔬','⚕️','🏥','🧬','🔭','💊','🩺','🧪','💉','🔧','🌿']
 const BRANDS = ['3M','Dentsply Sirona','Ivoclar','Hu-Friedy','Geistlich','EMS','Ormco','Nobel Biocare','Straumann','Kerr','GC America','Septodont']
+const BRAND_COLORS = ['bg-blue-100 text-blue-700','bg-indigo-100 text-indigo-700','bg-purple-100 text-purple-700','bg-orange-100 text-orange-700','bg-green-100 text-green-700','bg-teal-100 text-teal-700']
 
 export default function Sponsors() {
   const [copied, setCopied] = useState(null)
@@ -34,7 +34,9 @@ export default function Sponsors() {
           <div className="absolute bottom-0 left-0 w-60 h-60 bg-white/5 blur-3xl rounded-full" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center text-3xl mx-auto mb-5">🎁</div>
+          <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center mx-auto mb-5">
+            <Gift size={32} className="text-white" />
+          </div>
           <h1 className="text-3xl md:text-4xl font-black text-white mb-3">Sponsors &amp; Offers</h1>
           <p className="text-white/70 max-w-lg mx-auto">Exclusive deals and special offers from our trusted brand partners. Limited time — don't miss out!</p>
         </div>
@@ -51,7 +53,9 @@ export default function Sponsors() {
             return (
               <div key={s.id} className="card flex flex-col overflow-hidden">
                 <div className={`bg-gradient-to-br ${cls} border-b p-5 flex items-center gap-4`}>
-                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-xl shadow-sm shrink-0">🏷️</div>
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm shrink-0">
+                    <TagIcon size={22} className="text-arena-blue" />
+                  </div>
                   <div>
                     <div className="text-xs font-bold uppercase tracking-wide opacity-60">{s.brand}</div>
                     <div className="font-bold text-sm text-gray-900 leading-snug">{s.title}</div>
@@ -71,7 +75,7 @@ export default function Sponsors() {
                     </button>
                   </div>
 
-                  <div className="text-xs text-red-500 font-medium flex items-center gap-1.5">⏰ Expires: {s.expiry}</div>
+                  <div className="text-xs text-red-500 font-medium flex items-center gap-1.5"><Clock size={11} /> Expires: {s.expiry}</div>
                   <a href="/shop" className="btn-primary text-sm justify-center mt-auto">Shop Now <ArrowRight size={14} /></a>
                 </div>
               </div>
@@ -88,7 +92,9 @@ export default function Sponsors() {
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
             {BRANDS.map((brand, i) => (
               <div key={brand} className="bg-white border border-gray-100 rounded-2xl p-4 text-center shadow-card hover:shadow-hover hover:border-arena-blue/20 transition-all cursor-pointer">
-                <div className="text-2xl mb-2">{BRAND_EMOJIS[i % BRAND_EMOJIS.length]}</div>
+                <div className={`w-10 h-10 rounded-xl ${BRAND_COLORS[i % BRAND_COLORS.length]} flex items-center justify-center mx-auto mb-2 font-black text-sm`}>
+                  {brand[0]}
+                </div>
                 <div className="text-xs font-bold text-gray-700 leading-tight">{brand}</div>
               </div>
             ))}

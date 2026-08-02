@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, Search } from 'lucide-react'
 import SubNav from '../components/SubNav'
 import ProductCard from '../components/ProductCard'
 import TrustBadges from '../components/TrustBadges'
@@ -177,7 +177,9 @@ export default function Shop() {
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-20">
-                <div className="text-5xl mb-4">🔍</div>
+                <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+                  <Search size={32} className="text-gray-300" />
+                </div>
                 <h3 className="text-lg font-bold text-gray-700 mb-2">No products found</h3>
                 <p className="text-gray-400 text-sm">Try adjusting your filters or search query.</p>
               </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Store, Phone, ShoppingCart, X, Plus, Filter, Package } from 'lucide-react'
+import { Store, Phone, ShoppingCart, X, Plus, Filter, Package, Camera, Users, ShieldCheck } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import SubNav from '../components/SubNav'
 import TrustBadges from '../components/TrustBadges'
@@ -102,9 +102,15 @@ export default function Marketplace() {
       {/* How it works */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 grid grid-cols-3 gap-4 text-center">
-          {[['📸','Post Your Item','List equipment with photos & details'],['🤝','Connect with Buyers','Interested buyers contact you directly'],['✅','Safe Transaction','Complete the sale securely']].map(([icon,title,desc]) => (
+          {[
+            [Camera,      'Post Your Item',     'List equipment with photos & details'],
+            [Users,       'Connect with Buyers', 'Interested buyers contact you directly'],
+            [ShieldCheck, 'Safe Transaction',    'Complete the sale securely'],
+          ].map(([Icon, title, desc]) => (
             <div key={title} className="flex flex-col items-center gap-1">
-              <div className="text-2xl mb-1">{icon}</div>
+              <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center mb-1">
+                <Icon size={20} className="text-green-600" />
+              </div>
               <div className="font-semibold text-sm text-gray-900">{title}</div>
               <div className="text-xs text-gray-400">{desc}</div>
             </div>
@@ -246,7 +252,7 @@ export default function Marketplace() {
               )}
               <p className="text-xs text-gray-400">Your listing will be reviewed by our team before it goes live.</p>
               <button type="submit" disabled={posting || submitted} className={`w-full py-3 rounded-xl font-bold text-white transition-colors ${submitted ? 'bg-green-500' : 'bg-green-600 hover:bg-green-700'}`}>
-                {submitted ? '✓ Submitted for Review!' : posting ? 'Submitting...' : 'Submit Listing'}
+                {submitted ? 'Submitted for Review!' : posting ? 'Submitting...' : 'Submit Listing'}
               </button>
             </form>
           </div>

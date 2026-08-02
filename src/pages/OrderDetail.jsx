@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, CheckCircle, Clock, Truck, Package, XCircle } from 'lucide-react'
+import { ArrowLeft, CheckCircle, Clock, Truck, Package, XCircle, Banknote } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 
@@ -121,7 +121,7 @@ export default function OrderDetail() {
             <div className="flex justify-between font-black text-gray-900 text-base pt-2 border-t border-gray-100">
               <span>Total</span><span>EGP {(+order.total).toFixed(2)}</span>
             </div>
-            <div className="text-xs text-gray-400 pt-1">💵 Cash on Delivery</div>
+            <div className="text-xs text-gray-400 pt-1 flex items-center gap-1"><Banknote size={11} /> Cash on Delivery</div>
           </div>
         </div>
       </div>

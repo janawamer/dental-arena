@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Phone, Mail, MapPin, MessageCircle, ChevronDown, Send } from 'lucide-react'
+import { Phone, Mail, MapPin, MessageCircle, ChevronDown, Send, ShoppingBag, Zap, Store, RotateCcw, CheckCircle } from 'lucide-react'
 import TrustBadges from '../components/TrustBadges'
 
 const faqs = [
@@ -42,7 +42,9 @@ export default function Contact() {
           <div className="absolute top-0 right-0 w-80 h-80 bg-arena-teal/10 blur-3xl rounded-full" />
         </div>
         <div className="relative">
-          <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-2xl mx-auto mb-4">📞</div>
+          <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-4">
+            <Phone size={26} className="text-white" />
+          </div>
           <h1 className="text-3xl font-black text-white mb-2">Contact Us</h1>
           <p className="text-slate-400 max-w-md mx-auto">We're here to help. Reach out and we'll get back to you as soon as possible.</p>
         </div>
@@ -77,9 +79,14 @@ export default function Contact() {
           <div className="bg-gray-50 rounded-2xl p-5 border border-gray-100">
             <div className="font-semibold text-sm text-gray-900 mb-3">Quick Links</div>
             <div className="grid grid-cols-2 gap-2">
-              {[['🛒','Browse Shop','/shop'],['🔥','Hot Deals','/hot-deals'],['🏪','Marketplace','/marketplace'],['↩️','Refund Policy','/refund']].map(([e,label,to]) => (
+              {[
+                [ShoppingBag, 'Browse Shop',   '/shop'],
+                [Zap,         'Hot Deals',     '/hot-deals'],
+                [Store,       'Marketplace',   '/marketplace'],
+                [RotateCcw,   'Refund Policy', '/refund'],
+              ].map(([Icon, label, to]) => (
                 <a key={label} href={to} className="flex items-center gap-2 text-xs font-medium text-gray-600 hover:text-arena-blue bg-white border border-gray-100 rounded-xl px-3 py-2.5 transition-colors hover:border-arena-blue/30">
-                  <span>{e}</span>{label}
+                  <Icon size={13} className="shrink-0" />{label}
                 </a>
               ))}
             </div>
@@ -104,7 +111,7 @@ export default function Contact() {
             </div>
             <div><label className="block text-sm font-semibold mb-1.5">Message *</label><textarea className="input min-h-28 resize-y" placeholder="How can we help you?" required /></div>
             <button type="submit" className={`btn-primary w-full justify-center py-3.5 ${sent ? '!bg-green-500' : ''}`}>
-              {sent ? '✓ Message Sent!' : <><Send size={16} /> Send Message</>}
+              {sent ? <><CheckCircle size={16} /> Message Sent!</> : <><Send size={16} /> Send Message</>}
             </button>
           </form>
         </div>

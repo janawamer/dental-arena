@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Phone, Mail, MapPin } from 'lucide-react'
+import { Phone, Mail, MapPin, Camera, Globe, MessageCircle } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -13,9 +13,9 @@ export default function Footer() {
             Egypt's trusted all-in-one dental supply platform — premium products, hot deals, and a secure marketplace.
           </p>
           <div className="flex gap-2 sm:gap-3">
-            {[['📸','Instagram'],['📘','Facebook'],['💬','WhatsApp']].map(([emoji, label]) => (
-              <a key={label} href="#" aria-label={label} className="w-8 sm:w-9 h-8 sm:h-9 rounded-xl bg-white/5 hover:bg-arena-blue flex items-center justify-center transition-colors text-sm">
-                {emoji}
+            {[[Camera, 'Instagram'], [Globe, 'Facebook'], [MessageCircle, 'WhatsApp']].map(([Icon, label]) => (
+              <a key={label} href="#" aria-label={label} className="w-8 sm:w-9 h-8 sm:h-9 rounded-xl bg-white/5 hover:bg-arena-blue flex items-center justify-center transition-colors">
+                <Icon size={15} />
               </a>
             ))}
           </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { ShoppingBag, ArrowRight, CheckCircle, Truck } from 'lucide-react'
+import { ShoppingBag, ArrowRight, CheckCircle, Truck, Banknote } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
@@ -129,7 +129,7 @@ export default function Checkout() {
           <div className="card p-6">
             <h2 className="font-bold text-gray-900 mb-4">Payment</h2>
             <div className="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-              <span className="text-lg">💵</span>
+              <Banknote size={20} className="shrink-0 text-amber-600" />
               <div><strong>Cash on Delivery</strong> — Pay when your order arrives. No online payment required.</div>
             </div>
           </div>

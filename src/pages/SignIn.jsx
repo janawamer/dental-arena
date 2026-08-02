@@ -3,6 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import { specialties } from '../data/products'
 
 export default function SignIn() {
   const [tab, setTab]       = useState('signin')
@@ -52,11 +53,12 @@ export default function SignIn() {
     }
     try {
       await signUp({
-        email:    fd.get('email'),
-        password: fd.get('password'),
-        fullName: `${fd.get('firstName')} ${fd.get('lastName')}`.trim(),
-        phone:    fd.get('phone'),
-        address:  fd.get('address'),
+        email:     fd.get('email'),
+        password:  fd.get('password'),
+        fullName:  `${fd.get('firstName')} ${fd.get('lastName')}`.trim(),
+        phone:     fd.get('phone'),
+        address:   fd.get('address'),
+        specialty: fd.get('specialty'),
       })
       setError('')
       // Show success and switch to sign-in
@@ -73,9 +75,8 @@ export default function SignIn() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-arena-blue to-arena-teal flex items-center justify-center text-xl shadow">🦷</div>
-            <span className="font-black text-arena-navy text-lg tracking-wide">DENTAL ARENA</span>
+          <Link to="/" className="inline-flex items-center justify-center">
+            <img src="/logo.png" alt="Dental Arena" className="h-14 w-auto object-contain" />
           </Link>
         </div>
 
@@ -135,10 +136,12 @@ export default function SignIn() {
                 <div><label className="block text-sm font-semibold mb-1.5">Email Address</label><input name="email" type="email" className="input" placeholder="you@example.com" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">Phone</label><input name="phone" type="tel" className="input" placeholder="+20 xxx xxx xxxx" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">Address <span className="text-red-500">*</span></label><input name="address" className="input" placeholder="Street, building, floor, apartment, city" required /></div>
-                <div><label className="block text-sm font-semibold mb-1.5">I am a…</label>
-                  <select name="role_type" className="input">
-                    <option>Dentist</option><option>Dental Technician</option>
-                    <option>Dental Student</option><option>Clinic Owner</option><option>Other</option>
+                <div><label className="block text-sm font-semibold mb-1.5">Specialty <span className="text-red-500">*</span></label>
+                  <select name="specialty" className="input" required defaultValue="">
+                    <option value="" disabled>Select your specialty</option>
+                    {specialties.filter(s => s.id !== 'all').map(s => (
+                      <option key={s.id} value={s.id}>{s.label}</option>
+                    ))}
                   </select>
                 </div>
                 <div><label className="block text-sm font-semibold mb-1.5">Password</label>

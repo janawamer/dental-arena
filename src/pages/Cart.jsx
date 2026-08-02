@@ -4,7 +4,7 @@ import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Truck } from 'lucide
 import { useCart } from '../context/CartContext'
 import { supabase } from '../lib/supabase'
 
-const ICONS = ['🦷','🔬','💊','🩺','⚕️','🏥','🔧','🧪']
+const ICONS = ['🔬','💊','🩺','⚕️','🏥','🔧','🧪','🧬']
 const COLORS = ['bg-blue-50','bg-purple-50','bg-green-50','bg-orange-50','bg-teal-50']
 
 const COUPONS = { 'ARENA10': 0.10, 'DENTAL20': 0.20, 'WELCOME15': 0.15 }

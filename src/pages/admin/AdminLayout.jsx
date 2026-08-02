@@ -25,7 +25,7 @@ export default function AdminLayout() {
       <aside className="w-14 sm:w-16 lg:w-60 bg-arena-navy flex flex-col shrink-0 sticky top-0 h-screen overflow-y-auto">
         <div className="px-3 lg:px-5 py-5 lg:py-6 border-b border-white/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-arena-blue to-arena-teal flex items-center justify-center text-base shrink-0">🦷</div>
+            <img src="/logo.png" alt="Dental Arena" className="w-8 h-8 object-contain brightness-0 invert shrink-0" />
             <div className="hidden lg:block">
               <div className="text-white font-black text-sm">DENTAL ARENA</div>
               <div className="text-white/40 text-xs">Admin Panel</div>

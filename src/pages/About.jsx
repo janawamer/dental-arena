@@ -9,7 +9,7 @@ export default function About() {
       <section className="bg-gradient-to-br from-slate-900 to-arena-navy py-16 text-center relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none"><div className="absolute top-0 right-0 w-80 h-80 bg-arena-blue/20 blur-3xl rounded-full" /></div>
         <div className="relative max-w-3xl mx-auto px-4">
-          <div className="text-5xl mb-5">🦷</div>
+          <img src="/logo.png" alt="Dental Arena" className="h-20 w-auto object-contain mx-auto mb-5 brightness-0 invert" />
           <h1 className="text-3xl md:text-4xl font-black text-white mb-3">About Dental Arena</h1>
           <p className="text-slate-400 leading-relaxed">Egypt's trusted all-in-one dental supply platform — bringing premium products, unbeatable deals, and a safe marketplace to every dental professional.</p>
         </div>

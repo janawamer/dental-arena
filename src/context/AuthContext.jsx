@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
     return () => subscription.unsubscribe()
   }, [])
 
-  async function signUp({ email, password, fullName, phone, address }) {
+  async function signUp({ email, password, fullName, phone, address, specialty }) {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -43,7 +43,12 @@ export function AuthProvider({ children }) {
     })
     if (error) throw error
     if (data.user) {
-      await supabase.from('profiles').update({ full_name: fullName, phone: phone || null, address: address || null }).eq('id', data.user.id)
+      await supabase.from('profiles').update({
+        full_name: fullName,
+        phone: phone || null,
+        address: address || null,
+        specialty: specialty || null,
+      }).eq('id', data.user.id)
     }
     return data
   }

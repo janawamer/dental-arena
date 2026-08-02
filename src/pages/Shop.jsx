@@ -160,7 +160,7 @@ function SpecialtyIcon({ id }) {
   }
   return (
     <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-3 text-indigo-600 group-hover:scale-110 transition-transform group-hover:bg-indigo-100">
-      {SPECIALTY_SVG[id] ?? <span className="text-2xl">🦷</span>}
+      {SPECIALTY_SVG[id] ?? <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M15 9C11 9 8 13 9 19L12 37C12.5 40 14 41 16 41C18 41 19.5 39 20 36L24 27L28 36C28.5 39 30 41 32 41C34 41 35.5 40 36 37L39 19C40 13 37 9 33 9C30 6 18 6 15 9Z"/></svg>}
     </div>
   )
 }
@@ -256,7 +256,7 @@ export default function Shop() {
               </button>
               <span className="text-gray-300">/</span>
               <div className="flex items-center gap-2">
-                <span className="text-xl">{SPECIALTY_EMOJI[selectedSpecialty] ?? '🦷'}</span>
+                <span className="text-indigo-600"><SpecialtyIcon id={selectedSpecialty} /></span>
                 <span className="font-bold text-gray-900">{specialties.find(s => s.id === selectedSpecialty)?.label}</span>
               </div>
               {searchQuery && <span className="text-gray-400 text-sm">• Search: "{searchQuery}"</span>}

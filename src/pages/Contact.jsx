@@ -45,7 +45,7 @@ export default function Contact() {
       formRef.current.reset()
       setTimeout(() => setSent(false), 5000)
     } catch (err) {
-      setError('Failed to send message. Please try again or contact us directly.')
+      setError(err?.text || err?.message || JSON.stringify(err) || 'Failed to send message.')
     } finally {
       setLoading(false)
     }

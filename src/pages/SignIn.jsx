@@ -3,7 +3,6 @@ import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import { specialties } from '../data/products'
 
 export default function SignIn() {
   const [tab, setTab]       = useState('signin')
@@ -53,12 +52,12 @@ export default function SignIn() {
     }
     try {
       await signUp({
-        email:     fd.get('email'),
-        password:  fd.get('password'),
-        fullName:  `${fd.get('firstName')} ${fd.get('lastName')}`.trim(),
-        phone:     fd.get('phone'),
-        address:   fd.get('address'),
-        specialty: fd.get('specialty'),
+        email:    fd.get('email'),
+        password: fd.get('password'),
+        fullName: `${fd.get('firstName')} ${fd.get('lastName')}`.trim(),
+        phone:    fd.get('phone'),
+        address:  fd.get('address'),
+        role:     fd.get('role'),
       })
       setError('')
       // Show success and switch to sign-in
@@ -136,12 +135,13 @@ export default function SignIn() {
                 <div><label className="block text-sm font-semibold mb-1.5">Email Address</label><input name="email" type="email" className="input" placeholder="you@example.com" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">Phone</label><input name="phone" type="tel" className="input" placeholder="+20 xxx xxx xxxx" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">Address <span className="text-red-500">*</span></label><input name="address" className="input" placeholder="Street, building, floor, apartment, city" required /></div>
-                <div><label className="block text-sm font-semibold mb-1.5">Specialty <span className="text-red-500">*</span></label>
-                  <select name="specialty" className="input" required defaultValue="">
-                    <option value="" disabled>Select your specialty</option>
-                    {specialties.filter(s => s.id !== 'all').map(s => (
-                      <option key={s.id} value={s.id}>{s.label}</option>
-                    ))}
+                <div><label className="block text-sm font-semibold mb-1.5">I am a… <span className="text-red-500">*</span></label>
+                  <select name="role" className="input" required>
+                    <option value="Dentist">Dentist</option>
+                    <option value="Dental Technician">Dental Technician</option>
+                    <option value="Dental Student">Dental Student</option>
+                    <option value="Clinic Owner">Clinic Owner</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
                 <div><label className="block text-sm font-semibold mb-1.5">Password</label>

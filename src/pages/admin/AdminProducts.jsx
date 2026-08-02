@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { Plus, Edit2, Trash2, X, Upload, Search } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useToast } from '../../components/Toast'
-import { specialties as SPECIALTY_LIST } from '../../data/products'
+import { specialties as SPECIALTY_LIST, categories as CATEGORIES } from '../../data/products'
 
 const EMPTY = { name:'', brand:'', specialty:'', category:'', price:'', old_price:'', stock:'', description:'', image_url:'', rating:'', reviews_count:'', is_hot_deal:false, hot_deal_expiry_days:'', is_active:true }
 
@@ -180,11 +180,16 @@ export default function AdminProducts() {
 
               <div className="sm:col-span-2"><label className="block text-sm font-semibold mb-1.5">Product Name *</label><input value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} className="input" required /></div>
               <div><label className="block text-sm font-semibold mb-1.5">Brand *</label><input value={form.brand} onChange={e=>setForm(f=>({...f,brand:e.target.value}))} className="input" required /></div>
-              <div><label className="block text-sm font-semibold mb-1.5">Category</label><input value={form.category} onChange={e=>setForm(f=>({...f,category:e.target.value}))} className="input" placeholder="e.g. Rotary Files" /></div>
               <div><label className="block text-sm font-semibold mb-1.5">Specialty *</label>
-                <select value={form.specialty} onChange={e=>setForm(f=>({...f,specialty:e.target.value}))} className="input" required>
-                  <option value="">Select…</option>
+                <select value={form.specialty} onChange={e=>setForm(f=>({...f,specialty:e.target.value,category:''}))} className="input" required>
+                  <option value="">Select specialty…</option>
                   {SPECIALTY_LIST.filter(s => s.id !== 'all').map(s=><option key={s.id} value={s.id}>{s.label}</option>)}
+                </select>
+              </div>
+              <div><label className="block text-sm font-semibold mb-1.5">Category *</label>
+                <select value={form.category} onChange={e=>setForm(f=>({...f,category:e.target.value}))} className="input" required disabled={!form.specialty}>
+                  <option value="">{form.specialty ? 'Select category…' : 'Select specialty first'}</option>
+                  {(CATEGORIES[form.specialty] || []).map(c=><option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
               <div><label className="block text-sm font-semibold mb-1.5">Price (EGP) *</label><input type="number" step="0.01" value={form.price} onChange={e=>setForm(f=>({...f,price:e.target.value}))} className="input" required min="0" /></div>

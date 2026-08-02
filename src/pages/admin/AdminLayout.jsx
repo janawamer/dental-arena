@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate, Link } from 'react-router-dom'
 import { LayoutDashboard, Package, ShoppingBag, ListChecks, LogOut, Settings, Stethoscope } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
@@ -25,13 +25,13 @@ export default function AdminLayout() {
       {/* Sidebar — icon-only on small screens, full on lg */}
       <aside className="w-14 sm:w-16 lg:w-60 bg-arena-navy flex flex-col shrink-0 sticky top-0 h-screen overflow-y-auto">
         <div className="px-3 lg:px-5 py-5 lg:py-6 border-b border-white/10">
-          <div className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
             <img src="/logo.png" alt="Dental Arena" className="w-8 h-8 object-contain brightness-0 invert shrink-0" />
             <div className="hidden lg:block">
               <div className="text-white font-black text-sm">DENTAL ARENA</div>
               <div className="text-white/40 text-xs">Admin Panel</div>
             </div>
-          </div>
+          </Link>
         </div>
 
         <nav className="flex-1 px-2 lg:px-3 py-4 flex flex-col gap-1">

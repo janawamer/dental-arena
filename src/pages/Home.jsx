@@ -87,15 +87,13 @@ export default function Home() {
             {/* Shop */}
             <div className="card overflow-hidden group cursor-pointer" onClick={() => window.location.href='/shop'}>
               <div className="h-2 sm:h-3 bg-gradient-to-r from-arena-blue to-arena-teal" />
-              <div className="relative h-48 overflow-hidden bg-white">
-                <img src={SHOP_IMG} alt="Dental products" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <ShoppingBag size={16} className="text-white" />
-                    </div>
-                    <span className="font-black text-white text-lg">SHOP</span>
+              <div className="relative h-52 overflow-hidden bg-white flex items-center justify-center">
+                <img src={SHOP_IMG} alt="Dental products" className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-500 p-2" />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-arena-navy/80 to-transparent px-4 py-3 flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <ShoppingBag size={14} className="text-white" />
                   </div>
+                  <span className="font-black text-white text-base">SHOP</span>
                 </div>
               </div>
               <div className="p-5">
@@ -108,21 +106,19 @@ export default function Home() {
 
             {/* Hot Deals */}
             <div className="card overflow-hidden group cursor-pointer" onClick={() => window.location.href='/hot-deals'}>
-              <div className="h-2 sm:h-3 bg-gradient-to-r from-orange-400 to-red-400" />
-              <div className="relative h-48 overflow-hidden bg-white">
-                <img src={DEALS_IMG} alt="Hot deals" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <Flame size={16} className="text-white" />
-                    </div>
-                    <span className="font-black text-white text-lg">HOT DEALS</span>
+              <div className="h-2 sm:h-3 bg-gradient-to-r from-arena-blue to-arena-teal" />
+              <div className="relative h-52 overflow-hidden bg-white flex items-center justify-center">
+                <img src={DEALS_IMG} alt="Hot deals" className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-500 p-2" />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-arena-navy/80 to-transparent px-4 py-3 flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Flame size={14} className="text-white" />
                   </div>
+                  <span className="font-black text-white text-base">HOT DEALS</span>
                 </div>
               </div>
               <div className="p-5">
                 <p className="text-gray-500 text-sm mb-4">Big savings on items near expiry or with special discounts.</p>
-                <Link to="/hot-deals" className="btn-orange w-full justify-center text-sm py-2.5">
+                <Link to="/hot-deals" className="btn-primary w-full justify-center text-sm py-2.5">
                   View Hot Deals <ArrowRight size={15} />
                 </Link>
               </div>
@@ -130,21 +126,19 @@ export default function Home() {
 
             {/* Marketplace */}
             <div className="card overflow-hidden group cursor-pointer" onClick={() => window.location.href='/marketplace'}>
-              <div className="h-2 sm:h-3 bg-gradient-to-r from-green-500 to-teal-500" />
-              <div className="relative h-48 overflow-hidden bg-white">
-                <img src={MARKET_IMG} alt="Dental marketplace" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <Store size={16} className="text-white" />
-                    </div>
-                    <span className="font-black text-white text-lg">MARKETPLACE</span>
+              <div className="h-2 sm:h-3 bg-gradient-to-r from-arena-blue to-arena-teal" />
+              <div className="relative h-52 overflow-hidden bg-white flex items-center justify-center">
+                <img src={MARKET_IMG} alt="Dental marketplace" className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-500 p-2" />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-arena-navy/80 to-transparent px-4 py-3 flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Store size={14} className="text-white" />
                   </div>
+                  <span className="font-black text-white text-base">MARKETPLACE</span>
                 </div>
               </div>
               <div className="p-5">
                 <p className="text-gray-500 text-sm mb-4">Buy or sell used dental equipment safely and easily.</p>
-                <Link to="/marketplace" className="btn-green w-full justify-center text-sm py-2.5">
+                <Link to="/marketplace" className="btn-primary w-full justify-center text-sm py-2.5">
                   Go to Marketplace <ArrowRight size={15} />
                 </Link>
               </div>

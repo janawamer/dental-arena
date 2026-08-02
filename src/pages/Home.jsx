@@ -5,9 +5,9 @@ import TrustBadges from '../components/TrustBadges'
 import { supabase } from '../lib/supabase'
 
 const HERO_IMG    = 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=700&h=600&fit=crop&q=80'
-const SHOP_IMG    = 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&h=300&fit=crop&q=80'
-const DEALS_IMG   = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=300&fit=crop&q=80'
-const MARKET_IMG  = 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=300&fit=crop&q=80'
+const SHOP_IMG    = '/section-shop.png'
+const DEALS_IMG   = '/section-hot-deals.png'
+const MARKET_IMG  = '/section-marketplace.png'
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([])
@@ -87,7 +87,7 @@ export default function Home() {
             {/* Shop */}
             <div className="card overflow-hidden group cursor-pointer" onClick={() => window.location.href='/shop'}>
               <div className="h-2 sm:h-3 bg-gradient-to-r from-arena-blue to-arena-teal" />
-              <div className="relative h-40 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-white">
                 <img src={SHOP_IMG} alt="Dental products" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
                   <div className="flex items-center gap-2">
@@ -109,7 +109,7 @@ export default function Home() {
             {/* Hot Deals */}
             <div className="card overflow-hidden group cursor-pointer" onClick={() => window.location.href='/hot-deals'}>
               <div className="h-2 sm:h-3 bg-gradient-to-r from-orange-400 to-red-400" />
-              <div className="relative h-40 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-white">
                 <img src={DEALS_IMG} alt="Hot deals" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
                   <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ export default function Home() {
             {/* Marketplace */}
             <div className="card overflow-hidden group cursor-pointer" onClick={() => window.location.href='/marketplace'}>
               <div className="h-2 sm:h-3 bg-gradient-to-r from-green-500 to-teal-500" />
-              <div className="relative h-40 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-white">
                 <img src={MARKET_IMG} alt="Dental marketplace" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
                   <div className="flex items-center gap-2">

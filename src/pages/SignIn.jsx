@@ -74,10 +74,11 @@ export default function SignIn() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex flex-col items-center justify-center gap-2">
-            <img src="/logo.png" alt="Dental Arena" className="h-24 w-auto object-contain drop-shadow-md" />
-            <span className="font-black text-arena-navy text-lg tracking-wide">DENTAL ARENA</span>
-          </Link>
+          <div className="inline-flex flex-col items-center gap-2">
+            <img src="/logo.png" alt="Dental Arena" className="h-40 w-auto object-contain drop-shadow-lg" />
+            <span className="font-black text-arena-navy text-2xl tracking-wide">DENTAL ARENA</span>
+            <span className="text-arena-teal text-sm font-medium tracking-widest uppercase">Egypt's #1 Dental Supply Platform</span>
+          </div>
         </div>
 
         <div className="flex bg-gray-100 rounded-2xl p-1 mb-6">

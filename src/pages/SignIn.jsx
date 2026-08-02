@@ -133,7 +133,7 @@ export default function SignIn() {
                   <div><label className="block text-sm font-semibold mb-1.5">Last Name</label><input name="lastName" className="input" placeholder="Last" required /></div>
                 </div>
                 <div><label className="block text-sm font-semibold mb-1.5">Email Address</label><input name="email" type="email" className="input" placeholder="you@example.com" required /></div>
-                <div><label className="block text-sm font-semibold mb-1.5">Phone</label><input name="phone" type="tel" className="input" placeholder="+20 xxx xxx xxxx" /></div>
+                <div><label className="block text-sm font-semibold mb-1.5">Phone</label><input name="phone" type="tel" className="input" placeholder="+20 xxx xxx xxxx" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">Address <span className="text-red-500">*</span></label><input name="address" className="input" placeholder="Street, building, floor, apartment, city" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">I am a…</label>
                   <select name="role_type" className="input">

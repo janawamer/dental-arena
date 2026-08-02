@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,8 @@
 @layer base {
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 100%; min-height: 100vh; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1a2340; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Lato', Georgia, sans-serif; background: #f8fafc; color: #1a2340; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', Georgia, serif; }
   #root { width: 100%; min-height: 100vh; display: flex; flex-direction: column; }
 }
 

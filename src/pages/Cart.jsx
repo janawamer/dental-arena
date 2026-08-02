@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag } from 'lucide-react'
+import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Truck } from 'lucide-react'
 import { useCart } from '../context/CartContext'
+import { supabase } from '../lib/supabase'
 
 const ICONS = ['🦷','🔬','💊','🩺','⚕️','🏥','🔧','🧪']
 const COLORS = ['bg-blue-50','bg-purple-50','bg-green-50','bg-orange-50','bg-teal-50']
@@ -13,7 +14,17 @@ export default function Cart() {
   const [coupon, setCoupon] = useState('')
   const [discount, setDiscount] = useState(0)
   const [couponMsg, setCouponMsg] = useState(null)
+  const [shippingFee, setShippingFee] = useState(0)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    supabase
+      .from('settings')
+      .select('value')
+      .eq('key', 'shipping_fee')
+      .single()
+      .then(({ data }) => setShippingFee(Number(data?.value) || 0))
+  }, [])
 
   function applyCoupon() {
     const rate = COUPONS[coupon.trim().toUpperCase()]
@@ -27,8 +38,7 @@ export default function Cart() {
   }
 
   const discountAmt = Math.round(subtotal * discount)
-  const tax = Math.round((subtotal - discountAmt) * 0.14)
-  const total = subtotal - discountAmt + tax
+  const total = subtotal - discountAmt + shippingFee
 
   if (cart.length === 0) return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center py-20 px-4">
@@ -53,8 +63,11 @@ export default function Cart() {
         <div className="flex flex-col gap-3">
           {cart.map((item, i) => (
             <div key={item.id} className="bg-white rounded-2xl border border-gray-100 shadow-card p-4 flex items-center gap-4">
-              <div className={`w-18 h-16 ${COLORS[i % COLORS.length]} rounded-xl flex items-center justify-center text-3xl shrink-0 w-16`}>
-                {ICONS[i % ICONS.length]}
+              <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 shrink-0">
+                {item.image_url
+                  ? <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+                  : <div className={`w-full h-full ${COLORS[i % COLORS.length]} flex items-center justify-center text-2xl`}>{ICONS[i % ICONS.length]}</div>
+                }
               </div>
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-gray-900 text-sm truncate">{item.name}</div>
@@ -91,8 +104,10 @@ export default function Cart() {
           <div className="flex flex-col gap-3 text-sm">
             <div className="flex justify-between text-gray-600"><span>Subtotal</span><span className="font-semibold">EGP {subtotal.toLocaleString()}</span></div>
             {discount > 0 && <div className="flex justify-between text-green-600"><span>Discount ({(discount * 100).toFixed(0)}%)</span><span className="font-semibold">-EGP {discountAmt.toLocaleString()}</span></div>}
-            <div className="flex justify-between text-gray-600"><span>Shipping</span><span className="text-green-600 font-semibold">Free</span></div>
-            <div className="flex justify-between text-gray-600"><span>Tax (14%)</span><span className="font-semibold">EGP {tax.toLocaleString()}</span></div>
+            <div className="flex justify-between text-gray-600 items-center">
+              <span className="flex items-center gap-1.5"><Truck size={13} className="text-arena-teal" /> Shipping</span>
+              <span className="font-semibold">{shippingFee === 0 ? <span className="text-green-600">Free</span> : `EGP ${shippingFee.toLocaleString()}`}</span>
+            </div>
             <div className="flex justify-between font-black text-gray-900 text-base border-t border-gray-100 pt-3">
               <span>Total</span><span className="text-arena-blue">EGP {total.toLocaleString()}</span>
             </div>

@@ -5,7 +5,8 @@ import { useState } from 'react'
 export default function ProductCard({ product, index = 0 }) {
   const { addToCart } = useCart()
   const [added, setAdded] = useState(false)
-  const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null
+  const oldPrice = product.old_price ?? product.oldPrice
+  const discount = oldPrice ? Math.round((1 - product.price / oldPrice) * 100) : null
 
   function handleAdd() {
     addToCart({ id: product.id, name: product.name, price: product.price, brand: product.brand, image_url: product.image_url })
@@ -47,7 +48,7 @@ export default function ProductCard({ product, index = 0 }) {
         {/* Price */}
         <div className="flex items-baseline gap-1.5 mt-auto pt-1.5 sm:pt-2 flex-wrap">
           <span className="text-sm sm:text-base font-black text-arena-blue">EGP {product.price.toLocaleString()}</span>
-          {product.oldPrice && <span className="text-xs text-gray-400 line-through">EGP {product.oldPrice.toLocaleString()}</span>}
+          {oldPrice && <span className="text-xs text-gray-400 line-through">EGP {oldPrice.toLocaleString()}</span>}
         </div>
 
         <button

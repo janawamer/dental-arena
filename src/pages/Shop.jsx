@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { ChevronLeft, ChevronRight, SlidersHorizontal, Search } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import SubNav from '../components/SubNav'
 import ProductCard from '../components/ProductCard'
 import TrustBadges from '../components/TrustBadges'
-import { specialties, categories, products } from '../data/products'
+import { specialties, categories } from '../data/products'
+import { supabase } from '../lib/supabase'
 
 const SPECIALTY_ICONS = {
   endodontics: '🦷', orthodontics: '😁', restorative: '🔬',
@@ -21,26 +22,37 @@ export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [sortBy, setSortBy] = useState('default')
   const [priceMax, setPriceMax] = useState('')
-  const [filterOpen, setFilterOpen] = useState(false)
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (searchQuery) setSelectedSpecialty('all')
   }, [searchQuery])
 
-  const specialtyProducts = selectedSpecialty
-    ? selectedSpecialty === 'all'
-      ? products
-      : products.filter(p => p.specialty === selectedSpecialty)
-    : []
+  useEffect(() => {
+    if (!selectedSpecialty) return
+    setLoading(true)
+    setProducts([])
 
-  const filteredProducts = specialtyProducts
+    let query = supabase.from('products').select('*').eq('is_active', true)
+    if (selectedSpecialty !== 'all') query = query.eq('specialty', selectedSpecialty)
+
+    query.then(({ data }) => {
+      setProducts(data || [])
+      setLoading(false)
+    })
+  }, [selectedSpecialty])
+
+  const filteredProducts = products
     .filter(p => !selectedCategory || p.category === selectedCategory)
     .filter(p => !priceMax || p.price <= Number(priceMax))
-    .filter(p => !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.brand.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(p => !searchQuery ||
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.brand || '').toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price
       if (sortBy === 'price-desc') return b.price - a.price
-      if (sortBy === 'rating') return b.rating - a.rating
+      if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0)
       return 0
     })
 
@@ -124,7 +136,9 @@ export default function Shop() {
           {/* Filters + Products */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
             <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-              <span className="text-sm text-gray-500">{filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}</span>
+              <span className="text-sm text-gray-500">
+                {loading ? 'Loading...' : `${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`}
+              </span>
               <div className="flex items-center gap-3">
                 <input
                   type="number"
@@ -142,7 +156,12 @@ export default function Shop() {
               </div>
             </div>
 
-            {filteredProducts.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-20">
+                <div className="w-10 h-10 border-4 border-arena-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-gray-400 text-sm">Loading products...</p>
+              </div>
+            ) : filteredProducts.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-5xl mb-4">🔍</div>
                 <h3 className="text-lg font-bold text-gray-700 mb-2">No products found</h3>

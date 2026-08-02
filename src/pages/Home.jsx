@@ -1,9 +1,8 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ShoppingBag, Flame, Store, Star } from 'lucide-react'
 import TrustBadges from '../components/TrustBadges'
-import { products } from '../data/products'
-
-const featuredProducts = products.slice(0, 4)
+import { supabase } from '../lib/supabase'
 
 const HERO_IMG    = 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=700&h=600&fit=crop&q=80'
 const SHOP_IMG    = 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&h=300&fit=crop&q=80'
@@ -11,6 +10,18 @@ const DEALS_IMG   = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2a
 const MARKET_IMG  = 'https://images.unsplash.com/photo-1588776814546-1ffbb172ce4d?w=600&h=300&fit=crop&q=80'
 
 export default function Home() {
+  const [featuredProducts, setFeaturedProducts] = useState([])
+
+  useEffect(() => {
+    supabase
+      .from('products')
+      .select('*')
+      .eq('is_active', true)
+      .order('rating', { ascending: false })
+      .limit(4)
+      .then(({ data }) => setFeaturedProducts(data || []))
+  }, [])
+
   return (
     <div>
       {/* HERO */}
@@ -143,40 +154,48 @@ export default function Home() {
       </section>
 
       {/* FEATURED PRODUCTS */}
-      <section className="py-10 sm:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between mb-6 sm:mb-8">
-            <div>
-              <h2 className="text-xl sm:text-2xl font-black text-gray-900">Featured Products</h2>
-              <p className="text-gray-500 text-xs sm:text-sm mt-1">Top-rated picks from our catalog</p>
+      {featuredProducts.length > 0 && (
+        <section className="py-10 sm:py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="flex items-center justify-between mb-6 sm:mb-8">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-black text-gray-900">Featured Products</h2>
+                <p className="text-gray-500 text-xs sm:text-sm mt-1">Top-rated picks from our catalog</p>
+              </div>
+              <Link to="/shop" className="btn-outline text-xs sm:text-sm py-1.5 sm:py-2 px-3 sm:px-5">
+                View All <ArrowRight size={13} />
+              </Link>
             </div>
-            <Link to="/shop" className="btn-outline text-xs sm:text-sm py-1.5 sm:py-2 px-3 sm:px-5">
-              View All <ArrowRight size={13} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            {featuredProducts.map((p) => {
-              const discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : null
-              return (
-                <div key={p.id} className="card group flex flex-col overflow-hidden">
-                  <div className="relative h-28 sm:h-40 overflow-hidden bg-gray-100">
-                    <img src={p.image_url} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    {discount && <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">-{discount}%</span>}
-                  </div>
-                  <div className="p-2.5 sm:p-3 flex flex-col gap-1 flex-1">
-                    <div className="text-xs text-arena-teal font-medium truncate">{p.brand}</div>
-                    <h4 className="text-xs font-semibold text-gray-900 line-clamp-2 leading-snug">{p.name}</h4>
-                    <div className="mt-auto pt-1.5 flex items-baseline gap-1 flex-wrap">
-                      <span className="text-sm font-black text-arena-blue">EGP {p.price.toLocaleString()}</span>
-                      {p.oldPrice && <span className="text-xs text-gray-400 line-through hidden sm:inline">EGP {p.oldPrice.toLocaleString()}</span>}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              {featuredProducts.map((p) => {
+                const oldPrice = p.old_price || p.oldPrice
+                const discount = oldPrice ? Math.round((1 - p.price / oldPrice) * 100) : null
+                return (
+                  <div key={p.id} className="card group flex flex-col overflow-hidden">
+                    <div className="relative h-28 sm:h-40 overflow-hidden bg-gray-100">
+                      {p.image_url
+                        ? <img src={p.image_url} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        : <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                            <ShoppingBag size={24} className="text-gray-200" />
+                          </div>
+                      }
+                      {discount && <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">-{discount}%</span>}
+                    </div>
+                    <div className="p-2.5 sm:p-3 flex flex-col gap-1 flex-1">
+                      <div className="text-xs text-arena-teal font-medium truncate">{p.brand}</div>
+                      <h4 className="text-xs font-semibold text-gray-900 line-clamp-2 leading-snug">{p.name}</h4>
+                      <div className="mt-auto pt-1.5 flex items-baseline gap-1 flex-wrap">
+                        <span className="text-sm font-black text-arena-blue">EGP {p.price.toLocaleString()}</span>
+                        {oldPrice && <span className="text-xs text-gray-400 line-through hidden sm:inline">EGP {oldPrice.toLocaleString()}</span>}
+                      </div>
                     </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* SPONSORS BANNER */}
       <section className="relative overflow-hidden">

@@ -7,7 +7,7 @@ import { supabase } from '../lib/supabase'
 const HERO_IMG    = 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=700&h=600&fit=crop&q=80'
 const SHOP_IMG    = 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&h=300&fit=crop&q=80'
 const DEALS_IMG   = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=300&fit=crop&q=80'
-const MARKET_IMG  = 'https://images.unsplash.com/photo-1588776814546-1ffbb172ce4d?w=600&h=300&fit=crop&q=80'
+const MARKET_IMG  = 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=300&fit=crop&q=80'
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([])

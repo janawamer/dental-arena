@@ -2,8 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { Plus, Edit2, Trash2, X, Upload, Search } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useToast } from '../../components/Toast'
-
-const SPECIALTIES = ['Endodontics','Orthodontics','Implantology','Prosthodontics','Periodontics','Oral Surgery','Restorative','Preventive','Pediatric Dentistry','Imaging','Instruments']
+import { specialties as SPECIALTY_LIST } from '../../data/products'
 
 const EMPTY = { name:'', brand:'', specialty:'', category:'', price:'', old_price:'', stock:'', description:'', image_url:'', rating:'', reviews_count:'', is_hot_deal:false, hot_deal_expiry_days:'', is_active:true }
 
@@ -45,23 +44,28 @@ export default function AdminProducts() {
   async function handleSave(e) {
     e.preventDefault()
     setSaving(true)
-    const payload = {
-      name: form.name, brand: form.brand, specialty: form.specialty, category: form.category,
-      price: +form.price, old_price: form.old_price ? +form.old_price : null,
-      stock: +form.stock || 0, description: form.description, image_url: form.image_url || null,
-      rating: +form.rating || 0, reviews_count: +form.reviews_count || 0,
-      is_hot_deal: form.is_hot_deal, hot_deal_expiry_days: form.is_hot_deal ? +form.hot_deal_expiry_days || null : null,
-      is_active: form.is_active,
+    try {
+      const payload = {
+        name: form.name, brand: form.brand, specialty: form.specialty, category: form.category,
+        price: +form.price, old_price: form.old_price ? +form.old_price : null,
+        stock: +form.stock || 0, description: form.description, image_url: form.image_url || null,
+        rating: +form.rating || 0, reviews_count: +form.reviews_count || 0,
+        is_hot_deal: form.is_hot_deal, hot_deal_expiry_days: form.is_hot_deal ? +form.hot_deal_expiry_days || null : null,
+        is_active: form.is_active,
+      }
+      let error
+      if (modal === 'add') {
+        ;({ error } = await supabase.from('products').insert(payload))
+      } else {
+        ;({ error } = await supabase.from('products').update(payload).eq('id', modal.id))
+      }
+      if (error) addToast(error.message, 'error')
+      else { addToast(modal === 'add' ? 'Product added!' : 'Product updated!', 'success'); setModal(null); load() }
+    } catch (err) {
+      addToast('Error saving product: ' + (err?.message || 'Unknown error'), 'error')
+    } finally {
+      setSaving(false)
     }
-    let error
-    if (modal === 'add') {
-      ;({ error } = await supabase.from('products').insert(payload))
-    } else {
-      ;({ error } = await supabase.from('products').update(payload).eq('id', modal.id))
-    }
-    if (error) addToast(error.message, 'error')
-    else { addToast(modal === 'add' ? 'Product added!' : 'Product updated!', 'success'); setModal(null); load() }
-    setSaving(false)
   }
 
   async function handleDelete(id) {
@@ -180,7 +184,7 @@ export default function AdminProducts() {
               <div><label className="block text-sm font-semibold mb-1.5">Specialty *</label>
                 <select value={form.specialty} onChange={e=>setForm(f=>({...f,specialty:e.target.value}))} className="input" required>
                   <option value="">Select…</option>
-                  {SPECIALTIES.map(s=><option key={s}>{s}</option>)}
+                  {SPECIALTY_LIST.filter(s => s.id !== 'all').map(s=><option key={s.id} value={s.id}>{s.label}</option>)}
                 </select>
               </div>
               <div><label className="block text-sm font-semibold mb-1.5">Price (EGP) *</label><input type="number" step="0.01" value={form.price} onChange={e=>setForm(f=>({...f,price:e.target.value}))} className="input" required min="0" /></div>

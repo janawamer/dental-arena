@@ -27,7 +27,7 @@ export default function About() {
           <Link to="/shop" className="btn-primary inline-flex mt-8">Start Shopping <ArrowRight size={16} /></Link>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          {[['5,000+','Products Available','text-arena-blue bg-blue-50'],['2,000+','Happy Customers','text-orange-500 bg-orange-50'],['500+','Marketplace Listings','text-green-600 bg-green-50'],['50+','Trusted Brands','text-purple-600 bg-purple-50']].map(([num,label,cls]) => (
+          {[['5,000+','Products Available','text-arena-blue bg-blue-50'],['2,000+','Happy Customers','text-arena-teal bg-teal-50'],['500+','Marketplace Listings','text-green-600 bg-green-50'],['50+','Trusted Brands','text-purple-600 bg-purple-50']].map(([num,label,cls]) => (
             <div key={label} className={`rounded-2xl p-6 text-center ${cls}`}>
               <div className="text-3xl font-black mb-1">{num}</div>
               <div className="text-xs font-medium opacity-70">{label}</div>
@@ -46,7 +46,7 @@ export default function About() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { Icon: Award,      color: 'bg-blue-50 text-arena-blue',   title: 'Genuine Products',  desc: 'All items sourced from authorized distributors with full warranties and certifications.' },
-              { Icon: Truck,      color: 'bg-orange-50 text-orange-500', title: 'Fast Delivery',      desc: 'Nationwide delivery across Egypt with real-time tracking and reliable logistics.' },
+              { Icon: Truck,      color: 'bg-teal-50 text-arena-teal',   title: 'Fast Delivery',      desc: 'Nationwide delivery across Egypt with real-time tracking and reliable logistics.' },
               { Icon: Headphones, color: 'bg-green-50 text-green-600',   title: 'Expert Support',     desc: 'Our dental supply specialists help you choose the right products for your practice.' },
             ].map(({ Icon, color, title, desc }) => (
               <div key={title} className="card p-7 text-center">

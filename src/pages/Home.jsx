@@ -49,7 +49,7 @@ export default function Home() {
                 Explore Now <ArrowRight size={16} />
               </Link>
               <Link to="/hot-deals" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-white/10 text-white font-semibold rounded-full hover:bg-white/20 transition-all border border-white/20 text-sm sm:text-base">
-                <Flame size={16} className="text-orange-400" /> Hot Deals
+                <Flame size={16} className="text-arena-teal" /> Hot Deals
               </Link>
             </div>
           </div>
@@ -173,7 +173,7 @@ export default function Home() {
                             <ShoppingBag size={24} className="text-gray-200" />
                           </div>
                       }
-                      {discount && <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">-{discount}%</span>}
+                      {discount && <span className="absolute top-2 right-2 bg-arena-teal text-white text-xs font-bold px-1.5 py-0.5 rounded-full">-{discount}%</span>}
                     </div>
                     <div className="p-2.5 sm:p-3 flex flex-col gap-1 flex-1">
                       <div className="text-xs text-arena-teal font-medium truncate">{p.brand}</div>

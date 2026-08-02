@@ -128,8 +128,8 @@ export default function Checkout() {
 
           <div className="card p-6">
             <h2 className="font-bold text-gray-900 mb-4">Payment</h2>
-            <div className="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-              <Banknote size={20} className="shrink-0 text-amber-600" />
+            <div className="flex items-center gap-3 bg-teal-50 border border-teal-200 rounded-xl p-4 text-sm text-teal-800">
+              <Banknote size={20} className="shrink-0 text-arena-teal" />
               <div><strong>Cash on Delivery</strong> — Pay when your order arrives. No online payment required.</div>
             </div>
           </div>

@@ -170,7 +170,7 @@ export default function Marketplace() {
                   </div>
                   <div className="p-4 flex flex-col gap-2 flex-1">
                     <div className="flex gap-2 flex-wrap">
-                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${l.condition === 'New' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${l.condition === 'New' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
                         {l.condition}
                       </span>
                       {l.category && <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{l.category}</span>}

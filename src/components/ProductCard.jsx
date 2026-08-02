@@ -39,7 +39,7 @@ export default function ProductCard({ product, index = 0 }) {
             </div>
         }
         {discount && (
-          <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-1.5 sm:px-2 py-0.5 rounded-full">
+          <span className="absolute top-2 right-2 bg-arena-teal text-white text-xs font-bold px-1.5 sm:px-2 py-0.5 rounded-full">
             -{discount}%
           </span>
         )}
@@ -63,7 +63,7 @@ export default function ProductCard({ product, index = 0 }) {
         <div className="flex items-center gap-1">
           <div className="flex">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={10} fill={i < Math.round(product.rating) ? '#f59e0b' : 'none'} stroke={i < Math.round(product.rating) ? '#f59e0b' : '#d1d5db'} />
+              <Star key={i} size={10} fill={i < Math.round(product.rating) ? '#0891b2' : 'none'} stroke={i < Math.round(product.rating) ? '#0891b2' : '#d1d5db'} />
             ))}
           </div>
           <span className="text-xs text-gray-400">({product.reviews || product.reviews_count || 0})</span>

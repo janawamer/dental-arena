@@ -7,13 +7,13 @@ const COLOR_MAP = {
   blue:   'from-blue-50 to-blue-100 text-blue-600 border-blue-200',
   indigo: 'from-indigo-50 to-indigo-100 text-indigo-600 border-indigo-200',
   purple: 'from-purple-50 to-purple-100 text-purple-600 border-purple-200',
-  orange: 'from-orange-50 to-orange-100 text-orange-600 border-orange-200',
+  orange: 'from-teal-50 to-teal-100 text-teal-600 border-teal-200',
   green:  'from-green-50 to-green-100 text-green-600 border-green-200',
   teal:   'from-teal-50 to-teal-100 text-teal-600 border-teal-200',
 }
 
 const BRANDS = ['3M','Dentsply Sirona','Ivoclar','Hu-Friedy','Geistlich','EMS','Ormco','Nobel Biocare','Straumann','Kerr','GC America','Septodont']
-const BRAND_COLORS = ['bg-blue-100 text-blue-700','bg-indigo-100 text-indigo-700','bg-purple-100 text-purple-700','bg-orange-100 text-orange-700','bg-green-100 text-green-700','bg-teal-100 text-teal-700']
+const BRAND_COLORS = ['bg-blue-100 text-blue-700','bg-indigo-100 text-indigo-700','bg-purple-100 text-purple-700','bg-cyan-100 text-cyan-700','bg-green-100 text-green-700','bg-teal-100 text-teal-700']
 
 export default function Sponsors() {
   const [copied, setCopied] = useState(null)

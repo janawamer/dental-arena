@@ -4,7 +4,7 @@ import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Truck, ShoppingCart,
 import { useCart } from '../context/CartContext'
 import { supabase } from '../lib/supabase'
 
-const COLORS = ['bg-blue-50 text-blue-400','bg-purple-50 text-purple-400','bg-green-50 text-green-400','bg-orange-50 text-orange-400','bg-teal-50 text-teal-400']
+const COLORS = ['bg-blue-50 text-blue-400','bg-purple-50 text-purple-400','bg-green-50 text-green-400','bg-cyan-50 text-cyan-400','bg-teal-50 text-teal-400']
 
 const COUPONS = { 'ARENA10': 0.10, 'DENTAL20': 0.20, 'WELCOME15': 0.15 }
 

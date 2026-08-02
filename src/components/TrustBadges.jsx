@@ -2,7 +2,7 @@ import { ShieldCheck, Tag, RefreshCw, Headphones } from 'lucide-react'
 
 const badges = [
   { Icon: ShieldCheck, color: 'text-arena-blue bg-blue-50',   title: 'Trusted & Secure',  desc: 'Verified sellers and secure transactions.' },
-  { Icon: Tag,         color: 'text-orange-500 bg-orange-50', title: 'Best Deals',         desc: 'Hot deals, big discounts and exclusive offers.' },
+  { Icon: Tag,         color: 'text-arena-teal bg-teal-50',   title: 'Best Deals',         desc: 'Hot deals, big discounts and exclusive offers.' },
   { Icon: RefreshCw,   color: 'text-green-600 bg-green-50',   title: 'Buy & Sell Used',   desc: 'Marketplace for new and pre-owned items.' },
   { Icon: Headphones,  color: 'text-purple-600 bg-purple-50', title: 'Expert Support',    desc: 'We are here to help you anytime.' },
 ]

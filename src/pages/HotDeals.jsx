@@ -78,9 +78,9 @@ export default function HotDeals() {
       <SubNav />
 
       {/* Hero */}
-      <div className="bg-gradient-to-br from-orange-600 to-red-500 py-12 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-arena-navy to-arena-teal py-12 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-yellow-300/20 blur-3xl rounded-full" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 blur-3xl rounded-full" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
           <div className="flex items-center gap-3 mb-3">
@@ -89,7 +89,7 @@ export default function HotDeals() {
             </div>
             <h1 className="text-3xl md:text-4xl font-black text-white">HOT DEALS</h1>
           </div>
-          <p className="text-orange-100 max-w-lg">Big savings on items near expiry or with special discounts. Limited time — grab them before they're gone!</p>
+          <p className="text-blue-100 max-w-lg">Big savings on items near expiry or with special discounts. Limited time — grab them before they're gone!</p>
         </div>
       </div>
 
@@ -124,12 +124,12 @@ export default function HotDeals() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {loading ? (
           <div className="text-center py-20">
-            <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <div className="w-10 h-10 border-4 border-arena-teal border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-gray-400 text-sm">Loading deals...</p>
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
-            <Flame size={48} className="text-orange-200 mx-auto mb-4" />
+            <Flame size={48} className="text-teal-200 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-gray-700 mb-2">No hot deals right now</h3>
             <p className="text-gray-400 text-sm">Check back soon — the admin adds new deals regularly.</p>
           </div>
@@ -145,12 +145,12 @@ export default function HotDeals() {
                   <div className="relative h-36 bg-gray-100 overflow-hidden">
                     {deal.image_url
                       ? <img src={deal.image_url} alt={deal.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      : <div className="w-full h-full flex items-center justify-center bg-orange-50">
-                          <Flame size={32} className="text-orange-200" />
+                      : <div className="w-full h-full flex items-center justify-center bg-teal-50">
+                          <Flame size={32} className="text-teal-200" />
                         </div>
                     }
                     {discount && (
-                      <span className="absolute top-3 right-3 bg-orange-500 text-white text-xs font-black px-2.5 py-0.5 rounded-full">
+                      <span className="absolute top-3 right-3 bg-arena-teal text-white text-xs font-black px-2.5 py-0.5 rounded-full">
                         -{discount}%
                       </span>
                     )}
@@ -165,7 +165,7 @@ export default function HotDeals() {
                     <h4 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2">{deal.name}</h4>
 
                     <div className="flex items-baseline gap-2">
-                      <span className="text-base font-black text-orange-500">EGP {deal.price.toLocaleString()}</span>
+                      <span className="text-base font-black text-arena-teal">EGP {deal.price.toLocaleString()}</span>
                       {oldPrice && <span className="text-xs text-gray-400 line-through">EGP {oldPrice.toLocaleString()}</span>}
                     </div>
 
@@ -173,7 +173,7 @@ export default function HotDeals() {
 
                     <button
                       onClick={() => addToCart({ id: deal.id, name: deal.name, price: deal.price, brand: deal.brand, image_url: deal.image_url })}
-                      className="mt-auto w-full flex items-center justify-center gap-2 py-2.5 bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold rounded-xl transition-colors"
+                      className="mt-auto w-full flex items-center justify-center gap-2 py-2.5 bg-arena-teal hover:bg-cyan-700 text-white text-sm font-semibold rounded-xl transition-colors"
                     >
                       <ShoppingCart size={14} /> Grab Deal
                     </button>

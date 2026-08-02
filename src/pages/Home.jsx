@@ -97,7 +97,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-5">
-                <p className="text-gray-500 text-sm mb-4">All your dental supplies and equipment from top global brands.</p>
+                <p className="text-gray-500 text-sm mb-4">All your dental equipment from top global brands.</p>
                 <Link to="/shop" className="btn-primary w-full justify-center text-sm py-2.5">
                   Browse Products <ArrowRight size={15} />
                 </Link>

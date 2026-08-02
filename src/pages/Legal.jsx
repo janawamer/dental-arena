@@ -38,22 +38,66 @@ export function Privacy() {
 }
 
 export function Refund() {
-  return <LegalPage title="Refund Policy">
+  return <LegalPage title="Refund & Return Policy">
     <div className="grid grid-cols-3 gap-4 mb-8">
-      {[['📅','14-Day Returns','Return unopened items within 14 days'],['↩️','Easy Process','Contact us and we arrange a hassle-free return'],['💸','Fast Refunds','Processed within 5–7 business days']].map(([e,t,d]) => (
-        <div key={t} className={`rounded-xl p-4 text-center text-sm border border-gray-100 bg-gray-50`}>
+      {[['📅','3-Day Returns','Request a return within 3 days of delivery'],['↩️','Easy Process','Contact us and we arrange a hassle-free return'],['💸','Fast Refunds','Processed within 3 business days']].map(([e,t,d]) => (
+        <div key={t} className="rounded-xl p-4 text-center text-sm border border-gray-100 bg-gray-50">
           <div className="text-2xl mb-2">{e}</div>
           <div className="font-bold text-gray-900 mb-1">{t}</div>
           <div className="text-gray-500 text-xs">{d}</div>
         </div>
       ))}
     </div>
-    <Section title="1. Return Eligibility">Items must be returned within 14 days of delivery, in original unopened packaging, and not be sterile/single-use or near-expiry clearance products.</Section>
-    <Section title="2. Non-Returnable Items">Sterile single-use items once opened, clearance Hot Deals items, digital products, items damaged by misuse, and marketplace used equipment purchases.</Section>
-    <Section title="3. Defective or Wrong Items">Contact us within 48 hours of delivery with photos. We'll arrange a free replacement or full refund.</Section>
-    <Section title="4. How to Initiate a Return">Email <a href="mailto:Dentalarenastore@gmail.com" className="text-arena-blue hover:underline">Dentalarenastore@gmail.com</a> or WhatsApp +20 123 456 7890 with your order number and reason for return.</Section>
-    <Section title="5. Refund Process">Approved refunds are processed within 5–7 business days to your original payment method. COD orders receive bank transfers.</Section>
-    <Section title="6. Shipping Costs">Return shipping is the customer's responsibility unless the return is due to our error. Original shipping fees are non-refundable.</Section>
+
+    <Section title="1. Eligibility for Returns">
+      <p className="mb-3">Customers may request a return or refund within <strong>3 days</strong> of receiving their order.</p>
+      <p className="mb-2">To be eligible for a return, the product must:</p>
+      <ul className="list-disc list-inside space-y-1 text-gray-600">
+        <li>Be unused and in its original condition.</li>
+        <li>Be returned with the original packaging and all included accessories.</li>
+        <li>Have all factory seals intact. Products with broken or removed seals are not eligible for return.</li>
+      </ul>
+    </Section>
+
+    <Section title="2. Non-Eligible Items">
+      <p className="mb-2">Returns and refunds will not be accepted for products that:</p>
+      <ul className="list-disc list-inside space-y-1 text-gray-600">
+        <li>Have been used or damaged by the customer.</li>
+        <li>Are missing the original packaging or accessories.</li>
+        <li>Have broken or removed factory seals.</li>
+        <li>Are not in their original condition.</li>
+      </ul>
+    </Section>
+
+    <Section title="3. Damaged or Incorrect Items">
+      If you receive a damaged or incorrect product, please contact our Customer Support team within <strong>48 hours</strong> of delivery and provide clear photos of the product and packaging.
+    </Section>
+
+    <Section title="4. Refund Processing">
+      Once the returned product has been received, inspected, and approved, the refund will be processed within <strong>3 business days</strong> using the original payment method whenever possible.
+    </Section>
+
+    <Section title="5. Shipping Costs">
+      <ul className="list-disc list-inside space-y-1 text-gray-600">
+        <li>If the return is due to an error on our part (such as an incorrect or damaged item), Dental Arena will cover all shipping costs.</li>
+        <li>If the customer requests a return for personal reasons, the customer will be responsible for the shipping cost.</li>
+      </ul>
+    </Section>
+
+    <Section title="6. Order Cancellation">
+      Orders may be canceled within <strong>24 hours</strong> of placement. If the cancellation request is made after 24 hours, the customer will be responsible for any applicable shipping charges if the order has already been processed or shipped.
+    </Section>
+
+    <Section title="7. Inspection & Approval">
+      All returned items are subject to inspection upon receipt. Refunds will only be processed after our team confirms that the returned product meets the eligibility requirements stated in this policy.
+    </Section>
+
+    <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm text-arena-blue">
+      For return requests, contact us at{' '}
+      <a href="mailto:Dentalarenastore@gmail.com" className="font-semibold hover:underline">Dentalarenastore@gmail.com</a>
+      {' '}or WhatsApp{' '}
+      <a href="https://wa.me/201141129291" className="font-semibold hover:underline">+20 114 112 9291</a>.
+    </div>
   </LegalPage>
 }
 

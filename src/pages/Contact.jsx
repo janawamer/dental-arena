@@ -1,6 +1,11 @@
-import { useState } from 'react'
-import { Phone, Mail, MapPin, MessageCircle, ChevronDown, Send, ShoppingBag, Zap, Store, RotateCcw, CheckCircle } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { Phone, Mail, MapPin, MessageCircle, ChevronDown, Send, ShoppingBag, Zap, Store, RotateCcw, CheckCircle, Loader2 } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 import TrustBadges from '../components/TrustBadges'
+
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 const faqs = [
   { q: 'How do I place an order?', a: 'Browse our shop, add items to your cart, and proceed to checkout. You can pay securely online or choose cash on delivery.' },
@@ -25,13 +30,25 @@ function FAQ({ q, a }) {
 }
 
 export default function Contact() {
-  const [sent, setSent] = useState(false)
+  const [sent, setSent]     = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError]   = useState('')
+  const formRef = useRef(null)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    setSent(true)
-    setTimeout(() => setSent(false), 3000)
-    e.target.reset()
+    setError('')
+    setLoading(true)
+    try {
+      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY)
+      setSent(true)
+      formRef.current.reset()
+      setTimeout(() => setSent(false), 5000)
+    } catch (err) {
+      setError('Failed to send message. Please try again or contact us directly.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -96,22 +113,27 @@ export default function Contact() {
         {/* Form */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-card p-6">
           <h3 className="font-black text-gray-900 text-lg mb-5">Send Us a Message</h3>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-3">
-              <div><label className="block text-sm font-semibold mb-1.5">First Name *</label><input className="input" placeholder="First" required /></div>
-              <div><label className="block text-sm font-semibold mb-1.5">Last Name *</label><input className="input" placeholder="Last" required /></div>
+              <div><label className="block text-sm font-semibold mb-1.5">First Name *</label><input name="first_name" className="input" placeholder="First" required /></div>
+              <div><label className="block text-sm font-semibold mb-1.5">Last Name *</label><input name="last_name" className="input" placeholder="Last" required /></div>
             </div>
-            <div><label className="block text-sm font-semibold mb-1.5">Email *</label><input type="email" className="input" placeholder="you@example.com" required /></div>
-            <div><label className="block text-sm font-semibold mb-1.5">Phone</label><input type="tel" className="input" placeholder="+20 xxx xxx xxxx" /></div>
+            <div><label className="block text-sm font-semibold mb-1.5">Email *</label><input name="from_email" type="email" className="input" placeholder="you@example.com" required /></div>
+            <div><label className="block text-sm font-semibold mb-1.5">Phone</label><input name="phone" type="tel" className="input" placeholder="+20 xxx xxx xxxx" /></div>
             <div><label className="block text-sm font-semibold mb-1.5">Subject *</label>
-              <select className="input" required>
+              <select name="subject" className="input" required>
                 <option value="">Select a subject</option>
                 {['Product Inquiry','Order Issue','Marketplace Support','Hot Deals & Offers','Technical Support','Partnership','Other'].map(s => <option key={s}>{s}</option>)}
               </select>
             </div>
-            <div><label className="block text-sm font-semibold mb-1.5">Message *</label><textarea className="input min-h-28 resize-y" placeholder="How can we help you?" required /></div>
-            <button type="submit" className={`btn-primary w-full justify-center py-3.5 ${sent ? '!bg-green-500' : ''}`}>
-              {sent ? <><CheckCircle size={16} /> Message Sent!</> : <><Send size={16} /> Send Message</>}
+            <div><label className="block text-sm font-semibold mb-1.5">Message *</label><textarea name="message" className="input min-h-28 resize-y" placeholder="How can we help you?" required /></div>
+            {error && <p className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-2">{error}</p>}
+            <button type="submit" disabled={loading || sent} className={`btn-primary w-full justify-center py-3.5 disabled:opacity-70 ${sent ? '!bg-green-500' : ''}`}>
+              {sent
+                ? <><CheckCircle size={16} /> Message Sent!</>
+                : loading
+                ? <><Loader2 size={16} className="animate-spin" /> Sending…</>
+                : <><Send size={16} /> Send Message</>}
             </button>
           </form>
         </div>

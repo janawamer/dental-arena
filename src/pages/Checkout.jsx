@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { ShoppingBag, ArrowRight, CheckCircle } from 'lucide-react'
+import { ShoppingBag, ArrowRight, CheckCircle, Truck } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
@@ -14,10 +14,18 @@ export default function Checkout() {
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const [orderId, setOrderId] = useState(null)
+  const [shippingFee, setShippingFee] = useState(0)
 
-  const TAX_RATE = 0.14
-  const tax = subtotal * TAX_RATE
-  const total = subtotal + tax
+  useEffect(() => {
+    supabase
+      .from('settings')
+      .select('value')
+      .eq('key', 'shipping_fee')
+      .single()
+      .then(({ data }) => setShippingFee(Number(data?.value) || 0))
+  }, [])
+
+  const total = subtotal + shippingFee
 
   async function handlePlaceOrder(e) {
     e.preventDefault()
@@ -33,7 +41,8 @@ export default function Checkout() {
           status: 'pending',
           subtotal: +subtotal.toFixed(2),
           discount: 0,
-          tax: +tax.toFixed(2),
+          tax: 0,
+          shipping_fee: +shippingFee.toFixed(2),
           total: +total.toFixed(2),
           shipping_name: fd.get('name'),
           shipping_phone: fd.get('phone'),
@@ -148,7 +157,10 @@ export default function Checkout() {
           </div>
           <div className="border-t border-gray-100 pt-4 space-y-2 text-sm">
             <div className="flex justify-between text-gray-600"><span>Subtotal</span><span>EGP {subtotal.toFixed(2)}</span></div>
-            <div className="flex justify-between text-gray-600"><span>Tax (14%)</span><span>EGP {tax.toFixed(2)}</span></div>
+            <div className="flex justify-between text-gray-600 items-center">
+              <span className="flex items-center gap-1.5"><Truck size={13} className="text-arena-teal" /> Shipping</span>
+              <span>{shippingFee === 0 ? <span className="text-green-600 font-semibold">Free</span> : `EGP ${shippingFee.toFixed(2)}`}</span>
+            </div>
             <div className="flex justify-between text-gray-900 font-black text-base pt-2 border-t border-gray-100">
               <span>Total</span><span>EGP {total.toFixed(2)}</span>
             </div>

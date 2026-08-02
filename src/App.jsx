@@ -23,6 +23,7 @@ import Dashboard from './pages/admin/Dashboard'
 import AdminProducts from './pages/admin/AdminProducts'
 import AdminOrders from './pages/admin/AdminOrders'
 import AdminListings from './pages/admin/AdminListings'
+import AdminSettings from './pages/admin/AdminSettings'
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
                 <Route path="products" element={<AdminProducts />} />
                 <Route path="orders" element={<AdminOrders />} />
                 <Route path="listings" element={<AdminListings />} />
+                <Route path="settings" element={<AdminSettings />} />
               </Route>
 
               {/* Public routes */}

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { Plus, Edit2, Trash2, X, Upload, Search } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useToast } from '../../components/Toast'
-import { specialties as SPECIALTY_LIST, categories as CATEGORIES } from '../../data/products'
+import { useSpecialties } from '../../hooks/useSpecialties'
 
 const EMPTY = { name:'', brand:'', specialty:'', category:'', price:'', old_price:'', stock:'', description:'', image_url:'', rating:'', reviews_count:'', is_hot_deal:false, hot_deal_expiry_days:'', is_active:true }
 
@@ -16,6 +16,7 @@ export default function AdminProducts() {
   const [uploading, setUploading] = useState(false)
   const fileRef = useRef()
   const { addToast } = useToast()
+  const { specialties: SPECIALTY_LIST, categories: CATEGORIES } = useSpecialties()
 
   async function load() {
     const { data } = await supabase.from('products').select('*').order('created_at', { ascending: false })

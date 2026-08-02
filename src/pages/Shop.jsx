@@ -4,8 +4,8 @@ import { ChevronLeft } from 'lucide-react'
 import SubNav from '../components/SubNav'
 import ProductCard from '../components/ProductCard'
 import TrustBadges from '../components/TrustBadges'
-import { specialties, categories } from '../data/products'
 import { supabase } from '../lib/supabase'
+import { useSpecialties } from '../hooks/useSpecialties'
 
 const SPECIALTY_EMOJI = {}
 
@@ -154,20 +154,25 @@ const SPECIALTY_SVG = {
   </>),
 }
 
-function SpecialtyIcon({ id }) {
-  if (SPECIALTY_EMOJI[id]) {
-    return <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">{SPECIALTY_EMOJI[id]}</div>
-  }
+function SpecialtyIcon({ id, icon, small = false }) {
+  const size = small ? 'w-6 h-6' : 'w-12 h-12 mb-3'
+  const svgSize = small ? 'w-4 h-4' : 'w-7 h-7'
   return (
-    <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-3 text-indigo-600 group-hover:scale-110 transition-transform group-hover:bg-indigo-100">
-      {SPECIALTY_SVG[id] ?? <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M15 9C11 9 8 13 9 19L12 37C12.5 40 14 41 16 41C18 41 19.5 39 20 36L24 27L28 36C28.5 39 30 41 32 41C34 41 35.5 40 36 37L39 19C40 13 37 9 33 9C30 6 18 6 15 9Z"/></svg>}
+    <div className={`${size} rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:scale-110 transition-transform group-hover:bg-indigo-100 shrink-0`}>
+      {SPECIALTY_SVG[id]
+        ? <span className={svgSize + ' flex items-center justify-center'}>{SPECIALTY_SVG[id]}</span>
+        : <span className={small ? 'text-base' : 'text-2xl'}>{icon || '🦷'}</span>
+      }
     </div>
   )
 }
 
+const ALL_SPECIALTY = { id: 'all', label: 'All Specialties', icon: '⬛', description: 'Browse our complete catalog.' }
+
 export default function Shop() {
   const [searchParams] = useSearchParams()
   const searchQuery = searchParams.get('search') || ''
+  const { specialties, categories, loading: specsLoading } = useSpecialties()
 
   const [selectedSpecialty, setSelectedSpecialty] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
@@ -175,6 +180,8 @@ export default function Shop() {
   const [priceMax, setPriceMax] = useState('')
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
+
+  const allSpecialties = [...specialties, ALL_SPECIALTY]
 
   useEffect(() => {
     if (searchQuery) setSelectedSpecialty('all')
@@ -211,6 +218,8 @@ export default function Shop() {
     ? categories[selectedSpecialty] || []
     : []
 
+  const activeSpecialty = allSpecialties.find(s => s.id === selectedSpecialty)
+
   return (
     <div>
       <SubNav />
@@ -231,15 +240,19 @@ export default function Shop() {
           {/* SPECIALTY GRID */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {specialties.map(s => (
+              {specsLoading ? (
+                <div className="col-span-full flex justify-center py-16">
+                  <div className="w-8 h-8 border-4 border-arena-blue border-t-transparent rounded-full animate-spin" />
+                </div>
+              ) : allSpecialties.map(s => (
                 <button
                   key={s.id}
                   onClick={() => setSelectedSpecialty(s.id)}
                   className="card p-5 text-left hover:border-arena-blue hover:scale-[1.02] transition-all duration-200 group"
                 >
-                  <SpecialtyIcon id={s.id} />
+                  <SpecialtyIcon id={s.id} icon={s.icon} />
                   <div className="font-bold text-sm text-gray-900 mb-1">{s.label}</div>
-                  <div className="text-xs text-gray-400 leading-relaxed line-clamp-2">{s.desc}</div>
+                  <div className="text-xs text-gray-400 leading-relaxed line-clamp-2">{s.description}</div>
                 </button>
               ))}
             </div>
@@ -256,8 +269,8 @@ export default function Shop() {
               </button>
               <span className="text-gray-300">/</span>
               <div className="flex items-center gap-2">
-                <span className="text-indigo-600"><SpecialtyIcon id={selectedSpecialty} /></span>
-                <span className="font-bold text-gray-900">{specialties.find(s => s.id === selectedSpecialty)?.label}</span>
+                <SpecialtyIcon id={selectedSpecialty} icon={activeSpecialty?.icon} small />
+                <span className="font-bold text-gray-900">{activeSpecialty?.label}</span>
               </div>
               {searchQuery && <span className="text-gray-400 text-sm">• Search: "{searchQuery}"</span>}
             </div>

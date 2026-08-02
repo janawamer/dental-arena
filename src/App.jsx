@@ -24,6 +24,7 @@ import AdminProducts from './pages/admin/AdminProducts'
 import AdminOrders from './pages/admin/AdminOrders'
 import AdminListings from './pages/admin/AdminListings'
 import AdminSettings from './pages/admin/AdminSettings'
+import AdminSpecialties from './pages/admin/AdminSpecialties'
 import Wishlist from './pages/Wishlist'
 import { WishlistProvider } from './context/WishlistContext'
 
@@ -41,6 +42,7 @@ export default function App() {
                 <Route path="products" element={<AdminProducts />} />
                 <Route path="orders" element={<AdminOrders />} />
                 <Route path="listings" element={<AdminListings />} />
+                <Route path="specialties" element={<AdminSpecialties />} />
                 <Route path="settings" element={<AdminSettings />} />
               </Route>
 

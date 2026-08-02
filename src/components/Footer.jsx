@@ -6,9 +6,8 @@ export default function Footer() {
     <footer className="bg-arena-navy text-slate-300 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
         <div className="col-span-2 md:col-span-1">
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-arena-blue to-arena-teal flex items-center justify-center text-base shrink-0">🦷</div>
-            <span className="font-black text-white text-sm tracking-wide">DENTAL ARENA</span>
+          <div className="mb-3 sm:mb-4">
+            <img src="/logo.png" alt="Dental Arena" className="h-14 w-auto object-contain brightness-0 invert" />
           </div>
           <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4 sm:mb-5">
             Egypt's trusted all-in-one dental supply platform — premium products, hot deals, and a secure marketplace.

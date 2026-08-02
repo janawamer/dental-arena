@@ -35,14 +35,8 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center gap-4 py-3">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 shrink-0">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-arena-blue to-arena-teal flex items-center justify-center shadow-md">
-              <span className="text-white text-xl">🦷</span>
-            </div>
-            <div className="hidden sm:block">
-              <div className="font-black text-arena-navy text-sm leading-tight tracking-wide">DENTAL ARENA</div>
-              <div className="text-gray-400 text-xs">All in One Place</div>
-            </div>
+          <Link to="/" className="flex items-center shrink-0">
+            <img src="/logo.png" alt="Dental Arena" className="h-12 sm:h-14 w-auto object-contain" />
           </Link>
 
           {/* Search */}

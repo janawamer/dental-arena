@@ -7,14 +7,7 @@ import TrustBadges from '../components/TrustBadges'
 import { specialties, categories } from '../data/products'
 import { supabase } from '../lib/supabase'
 
-// Keep original emoji icons for these 5
-const SPECIALTY_EMOJI = {
-  'infection-control': '🛡️',
-  microscopes: '🔭',
-  digital: '💻',
-  all: '⬛',
-  pediatric: '👶',
-}
+const SPECIALTY_EMOJI = {}
 
 const ic = (children) => (
   <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
@@ -120,6 +113,44 @@ const SPECIALTY_SVG = {
     <line x1="44" y1="14" x2="40" y2="14"/>
     <line x1="42" y1="20" x2="40" y2="16"/>
     <line x1="24" y1="4" x2="24" y2="8"/>
+  </>),
+
+  'infection-control': ic(<>
+    <path d="M24 5L8 11V24C8 33 15 40 24 43C33 40 40 33 40 24V11L24 5Z"/>
+    <line x1="24" y1="17" x2="24" y2="31"/>
+    <line x1="17" y1="24" x2="31" y2="24"/>
+  </>),
+
+  microscopes: ic(<>
+    <rect x="20" y="5" width="8" height="5" rx="1.5"/>
+    <line x1="24" y1="10" x2="24" y2="20"/>
+    <path d="M18 20H30L28 24H20L18 20Z"/>
+    <line x1="24" y1="24" x2="24" y2="32"/>
+    <line x1="14" y1="32" x2="34" y2="32"/>
+    <rect x="16" y="36" width="16" height="5" rx="2"/>
+    <path d="M24 10C24 10 34 10 34 22"/>
+    <circle cx="34" cy="22" r="2" fill="currentColor" opacity="0.2"/>
+  </>),
+
+  digital: ic(<>
+    <rect x="6" y="9" width="36" height="24" rx="2"/>
+    <rect x="8" y="11" width="32" height="20" rx="1"/>
+    <path d="M4 33H44L42 38H6L4 33Z"/>
+    <path d="M19 15C17 15 16 17 16.5 20L18 27C18.5 29 19.5 30 21 30C22.5 30 23.5 29 24 27L24.5 25L25 27C25.5 29 26.5 30 28 30C29.5 30 30.5 29 31 27L32.5 20C33 17 32 15 30 15C28 13.5 21 13.5 19 15Z" strokeWidth="1.4"/>
+  </>),
+
+  pediatric: ic(<>
+    <path d="M17 12C14 12 12 15 13 19L15 34C15.5 36.5 17 37.5 19 37.5C21 37.5 22.5 36 23 33.5L24 28L25 33.5C25.5 36 27 37.5 29 37.5C31 37.5 32.5 36.5 33 34L35 19C36 15 34 12 31 12C28.5 10 19.5 10 17 12Z"/>
+    <circle cx="20" cy="19" r="1.8" fill="currentColor"/>
+    <circle cx="28" cy="19" r="1.8" fill="currentColor"/>
+    <path d="M20 24Q24 28 28 24"/>
+  </>),
+
+  all: ic(<>
+    <rect x="6" y="6" width="15" height="15" rx="2"/>
+    <rect x="27" y="6" width="15" height="15" rx="2"/>
+    <rect x="6" y="27" width="15" height="15" rx="2"/>
+    <rect x="27" y="27" width="15" height="15" rx="2"/>
   </>),
 }
 

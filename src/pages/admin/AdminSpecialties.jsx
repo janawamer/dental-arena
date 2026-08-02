@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { Plus, Edit2, Trash2, X, ChevronDown, ChevronRight } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useToast } from '../../components/Toast'
+import { renderSpecialtyIcon, ICON_SET } from '../../lib/specialtyIcons'
 
-const EMPTY = { id: '', label: '', icon: '🦷', description: '', sort_order: 0 }
+const EMPTY = { id: '', label: '', icon: 'endodontics', description: '', sort_order: 0 }
 
 export default function AdminSpecialties() {
   const [specialties, setSpecialties] = useState([])
@@ -49,7 +50,7 @@ export default function AdminSpecialties() {
     try {
       const payload = {
         label: form.label,
-        icon: form.icon || '🦷',
+        icon: form.icon || 'endodontics',
         description: form.description || null,
         sort_order: +form.sort_order || 0,
       }
@@ -117,8 +118,8 @@ export default function AdminSpecialties() {
             <div key={s.id} className="card overflow-hidden">
               {/* Specialty row */}
               <div className="flex items-center gap-3 px-4 py-3">
-                <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-xl shrink-0 select-none">
-                  {s.icon}
+                <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0">
+                  {renderSpecialtyIcon(s.icon)}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold text-gray-900">{s.label}</div>
@@ -222,18 +223,31 @@ export default function AdminSpecialties() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1.5">Icon (emoji)</label>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-2xl shrink-0 select-none">
-                    {form.icon || '🦷'}
+                <label className="block text-sm font-semibold mb-1.5">Icon</label>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0">
+                    {renderSpecialtyIcon(form.icon)}
                   </div>
-                  <input
-                    value={form.icon}
-                    onChange={e => setForm(f => ({ ...f, icon: e.target.value }))}
-                    className="input flex-1"
-                    placeholder="Paste an emoji here"
-                    maxLength={8}
-                  />
+                  <span className="text-sm text-gray-500">
+                    {ICON_SET.find(i => i.key === form.icon)?.label || 'Pick an icon below'}
+                  </span>
+                </div>
+                <div className="grid grid-cols-8 gap-1.5 max-h-48 overflow-y-auto p-1 bg-gray-50 rounded-xl border border-gray-100">
+                  {ICON_SET.map(icon => (
+                    <button
+                      key={icon.key}
+                      type="button"
+                      title={icon.label}
+                      onClick={() => setForm(f => ({ ...f, icon: icon.key }))}
+                      className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
+                        form.icon === icon.key
+                          ? 'bg-indigo-600 text-white ring-2 ring-indigo-400 ring-offset-1'
+                          : 'bg-white text-indigo-600 hover:bg-indigo-50 border border-gray-100'
+                      }`}
+                    >
+                      {renderSpecialtyIcon(icon.key)}
+                    </button>
+                  ))}
                 </div>
               </div>
 

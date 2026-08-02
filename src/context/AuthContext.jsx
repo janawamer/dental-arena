@@ -35,16 +35,15 @@ export function AuthProvider({ children }) {
     return () => subscription.unsubscribe()
   }, [])
 
-  async function signUp({ email, password, fullName, phone }) {
+  async function signUp({ email, password, fullName, phone, address }) {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { full_name: fullName } },
     })
     if (error) throw error
-    // update phone in profile
-    if (data.user && phone) {
-      await supabase.from('profiles').update({ phone, full_name: fullName }).eq('id', data.user.id)
+    if (data.user) {
+      await supabase.from('profiles').update({ full_name: fullName, phone: phone || null, address: address || null }).eq('id', data.user.id)
     }
     return data
   }

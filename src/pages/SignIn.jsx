@@ -56,6 +56,7 @@ export default function SignIn() {
         password: fd.get('password'),
         fullName: `${fd.get('firstName')} ${fd.get('lastName')}`.trim(),
         phone:    fd.get('phone'),
+        address:  fd.get('address'),
       })
       setError('')
       // Show success and switch to sign-in
@@ -133,6 +134,7 @@ export default function SignIn() {
                 </div>
                 <div><label className="block text-sm font-semibold mb-1.5">Email Address</label><input name="email" type="email" className="input" placeholder="you@example.com" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">Phone</label><input name="phone" type="tel" className="input" placeholder="+20 xxx xxx xxxx" /></div>
+                <div><label className="block text-sm font-semibold mb-1.5">Address <span className="text-red-500">*</span></label><input name="address" className="input" placeholder="Street, building, floor, apartment, city" required /></div>
                 <div><label className="block text-sm font-semibold mb-1.5">I am a…</label>
                   <select name="role_type" className="input">
                     <option>Dentist</option><option>Dental Technician</option>

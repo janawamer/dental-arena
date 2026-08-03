@@ -45,7 +45,7 @@ export default function Contact() {
       formRef.current.reset()
       setTimeout(() => setSent(false), 5000)
     } catch (err) {
-      setError(err?.text || err?.message || JSON.stringify(err) || 'Failed to send message.')
+      setError('Something went wrong. Please try again or reach us directly at Dentalarenastore@gmail.com')
     } finally {
       setLoading(false)
     }
